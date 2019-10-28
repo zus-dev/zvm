@@ -1,0 +1,8 @@
+name: zvm
+description: Dart implementation of the Infocom Z-Machine.
+homepage: https://github.com/zus-dev/zvm
+version: 0.1.0
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+dependencies:
+  test: ^1.9.3
