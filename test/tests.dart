@@ -5,7 +5,7 @@ import "package:zvm/z_screen.dart";
 
 void main() {
   final s = Platform.pathSeparator;
-  final zfile = File('test${s}data${s}minizork.z3');
+  final zfile = File('test${s}res${s}minizork.z3');
 
   try {
     var bytes = zfile.readAsBytesSync();
