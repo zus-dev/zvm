@@ -4,22 +4,25 @@ import 'dart:typed_data';
 import "package:test/test.dart";
 import "package:zvm/z_screen.dart";
 import 'package:zvm/z_header_3.dart';
+import 'package:zvm/z_header_5.dart';
 
 void main() {
   final s = Platform.pathSeparator;
-  final zfile = File('test${s}res${s}minizork.z3');
-
-  Uint8List bytes = null;
+  Uint8List minizork_z3 = null;
+  Uint8List etude_z5 = null;
+  Uint8List tester_z8 = null;
 
   try {
-    bytes = zfile.readAsBytesSync();
+    minizork_z3 = File('test${s}res${s}minizork.z3').readAsBytesSync();
+    etude_z5 = File('test${s}res${s}etude.z5').readAsBytesSync();
+    tester_z8 = File('test${s}res${s}Tester.z8').readAsBytesSync();
   } on Exception catch (fe) {
     print('$fe');
     exit(1);
   }
 
-  test("ZHeader3", () {
-    var header = ZHeader3(bytes);
+  test("ZHeader3-minizork", () {
+    var header = ZHeader3(minizork_z3);
     // Members of the base class.
     expect(header.version(), equals(3));
     expect(header.initial_pc(), equals(14297));
@@ -35,6 +38,56 @@ void main() {
     // Members of the ZHeader3
     expect(header.time_game(), equals(false));
     expect(header.file_length(), equals(52216));
+  });
+
+  test("ZHeader5-etude", () {
+    var header = ZHeader5(etude_z5);
+    // Members of the base class.
+    expect(header.version(), equals(5));
+    expect(header.initial_pc(), equals(1525));
+    expect(header.dictionary(), equals(1516));
+    expect(header.object_table(), equals(258));
+    expect(header.global_table(), equals(736));
+    expect(header.static_base(), equals(1514));
+    expect(header.transcripting(), equals(false));
+    expect(header.abbrev_table(), equals(66));
+    expect(header.force_fixed(), equals(false));
+    expect(header.release(), equals(2));
+    expect(header.checksum(), equals(46621));
+    // Members of the ZHeader3
+    expect(header.file_length(), equals(16508));
+    expect(header.graphics_font_wanted(), equals(false));
+    expect(header.undo_wanted(), equals(true));
+    expect(header.mouse_wanted(), equals(false));
+    expect(header.colors_wanted(), equals(true));
+    expect(header.sound_wanted(), equals(false));
+    expect(header.default_background_color(), equals(0));
+    expect(header.default_foreground_color(), equals(0));
+  });
+
+  test("ZHeader5-tester", () {
+    var header = ZHeader5(tester_z8);
+    // Members of the base class.
+    expect(header.version(), equals(8));
+    expect(header.initial_pc(), equals(23193));
+    expect(header.dictionary(), equals(20058));
+    expect(header.object_table(), equals(266));
+    expect(header.global_table(), equals(6905));
+    expect(header.static_base(), equals(18526));
+    expect(header.transcripting(), equals(false));
+    expect(header.abbrev_table(), equals(66));
+    expect(header.force_fixed(), equals(false));
+    expect(header.release(), equals(1));
+    expect(header.checksum(), equals(33307));
+    // Members of the ZHeader3
+    expect(header.file_length(), equals(83644));
+    expect(header.graphics_font_wanted(), equals(false));
+    expect(header.undo_wanted(), equals(true));
+    expect(header.mouse_wanted(), equals(false));
+    expect(header.colors_wanted(), equals(true));
+    expect(header.sound_wanted(), equals(false));
+    expect(header.default_background_color(), equals(0));
+    expect(header.default_foreground_color(), equals(0));
   });
 
   test("unicode_to_zascii", () {
@@ -61,15 +114,5 @@ void main() {
     expect(ZScreen.zascii_to_unicode(157), equals('\u00fc'));
     expect(ZScreen.zascii_to_unicode(223), equals('\u00bf'));
     expect(ZScreen.zascii_to_unicode(27), equals('\u001b'));
-  });
-
-  test("String.split() splits the string on the delimiter", () {
-    var string = "foo,bar,baz";
-    expect(string.split(","), equals(["foo", "bar", "baz"]));
-  });
-
-  test("String.trim() removes surrounding whitespace", () {
-    var string = "  foo ";
-    expect(string.trim(), equals("foo"));
   });
 }
