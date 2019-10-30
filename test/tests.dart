@@ -1,18 +1,41 @@
 import "dart:io";
+import 'dart:typed_data';
 
 import "package:test/test.dart";
 import "package:zvm/z_screen.dart";
+import 'package:zvm/z_header_3.dart';
 
 void main() {
   final s = Platform.pathSeparator;
   final zfile = File('test${s}res${s}minizork.z3');
 
+  Uint8List bytes = null;
+
   try {
-    var bytes = zfile.readAsBytesSync();
+    bytes = zfile.readAsBytesSync();
   } on Exception catch (fe) {
     print('$fe');
     exit(1);
   }
+
+  test("ZHeader3", () {
+    var header = ZHeader3(bytes);
+    // Members of the base class.
+    expect(header.version(), equals(3));
+    expect(header.initial_pc(), equals(14297));
+    expect(header.dictionary(), equals(10330));
+    expect(header.object_table(), equals(966));
+    expect(header.global_table(), equals(692));
+    expect(header.static_base(), equals(8583));
+    expect(header.transcripting(), equals(false));
+    expect(header.abbrev_table(), equals(500));
+    expect(header.force_fixed(), equals(false));
+    expect(header.release(), equals(34));
+    expect(header.checksum(), equals(55408));
+    // Members of the ZHeader3
+    expect(header.time_game(), equals(false));
+    expect(header.file_length(), equals(52216));
+  });
 
   test("unicode_to_zascii", () {
     expect(ZScreen.unicode_to_zascii('L'), equals(76));
