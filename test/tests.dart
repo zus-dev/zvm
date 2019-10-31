@@ -6,6 +6,9 @@ import "package:zvm/z_screen.dart";
 import 'package:zvm/z_header_3.dart';
 import 'package:zvm/z_header_5.dart';
 
+import 'package:zvm/z_status.dart';
+import 'package:zvm/stack.dart';
+
 void main() {
   final s = Platform.pathSeparator;
   Uint8List minizork_z3 = null;
@@ -114,5 +117,33 @@ void main() {
     expect(ZScreen.zascii_to_unicode(157), equals('\u00fc'));
     expect(ZScreen.zascii_to_unicode(223), equals('\u00bf'));
     expect(ZScreen.zascii_to_unicode(27), equals('\u001b'));
+  });
+
+  test("ZStatus", () {
+    var status = ZStatus();
+    status.timegame = false;
+    status.location = "Up in the clouds";
+    status.score = 1;
+    status.turns = 2;
+    status.hours = 3;
+    status.minutes = 4;
+    expect(status.toString(), equals("Up in the clouds                Score: 1 Turn: 2"));
+    status.timegame = true;
+    expect(status.toString(), equals("Up in the clouds                03:4"));
+  });
+
+  test("Stack", () {
+    var stack = Stack();
+    stack.push(1);
+    stack.push(2);
+    expect(stack.pop(), equals(2));
+    stack.push(3);
+    var copy = stack.clone();
+    expect(stack.pop(), equals(3));
+    expect(stack.pop(), equals(1));
+    copy.push(4);
+    expect(copy.pop(), equals(4));
+    expect(copy.pop(), equals(3));
+    expect(copy.pop(), equals(1));
   });
 }
