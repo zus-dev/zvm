@@ -1,6 +1,6 @@
 class ZFrameBound
 {
-	bool store;
+	bool store = false;
 	
 	ZFrameBound(this.store);
 

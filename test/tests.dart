@@ -2,6 +2,7 @@ import "dart:io";
 import 'dart:typed_data';
 
 import "package:test/test.dart";
+import 'package:zvm/z_machine.dart';
 import "package:zvm/z_screen.dart";
 import 'package:zvm/z_header_3.dart';
 import 'package:zvm/z_header_5.dart';
@@ -127,7 +128,8 @@ void main() {
     status.turns = 2;
     status.hours = 3;
     status.minutes = 4;
-    expect(status.toString(), equals("Up in the clouds                Score: 1 Turn: 2"));
+    expect(status.toString(),
+        equals("Up in the clouds                Score: 1 Turn: 2"));
     status.timegame = true;
     expect(status.toString(), equals("Up in the clouds                03:4"));
   });
@@ -146,4 +148,16 @@ void main() {
     expect(copy.pop(), equals(3));
     expect(copy.pop(), equals(1));
   });
+
+  test("ZMachine", () {
+    var screen = ZScreen();
+    var status = ZStatus();
+    var zm = TestZMachine(screen, status, minizork_z3);
+    expect(zm.pc, equals(0));
+  });
+}
+
+class TestZMachine extends ZMachine {
+  TestZMachine(ZScreen screen, ZStatus status_line, Uint8List memory_image)
+      : super(screen, status_line, memory_image);
 }

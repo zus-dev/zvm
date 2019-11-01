@@ -9,22 +9,22 @@ class ZWindow {
   static const int ITALIC = 4;
   static const int FIXED = 8;
 
-  int top;
-  int left;
-  int width;
-  int height;
-  int cursorx;
-  int cursory;
+  int top = 0;
+  int left = 0;
+  int width = 0;
+  int height = 0;
+  int cursorx = 0;
+  int cursory = 0;
 
   ZScreen screen;
 
-  bool upper;
+  bool upper = false;
   List<String> frameBuffer;
   StyleRegion regions;
-  int cursor;
-  int maxCursor;
-  int endWindow;
-  int startWindow;
+  int cursor = 0;
+  int maxCursor = 0;
+  int endWindow = 0;
+  int startWindow = 0;
 
   ZWindow(ZScreen screen, bool upper) {
     this.upper = upper;

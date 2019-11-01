@@ -1,4 +1,4 @@
 class IFFChunkInfo {
 	String chunktype;
-	int chunklength;
+	int chunklength = 0;
 }

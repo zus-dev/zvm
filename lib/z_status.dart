@@ -1,12 +1,12 @@
 import 'dart:core';
 
 class ZStatus {
-	bool timegame;
+	bool timegame = false;
 	String location;
-	int score;
-	int turns;
-	int hours;
-	int minutes;
+	int score = 0;
+	int turns = 0;
+	int hours = 0;
+	int minutes = 0;
 	
 	StringBuffer buffer;
 
