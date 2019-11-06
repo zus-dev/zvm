@@ -4,27 +4,25 @@ import 'dart:typed_data';
 
 /// Unsigned 16 bit value
 class Char {
+  static final int MIN_VALUE = 0;
+  static final int MAX_VALUE = 0xffff;
+
   int _value = 0;
 
-  Char([int code = 0]) {
+  Char([int value = 0]) {
     // TODO: code & 0xffff
     // MemoryUtil.toUnsigned16
-    assert(code >= 0 && code <= Character.MAX_VALUE);
-    this._value = code;
+    assert(value >= MIN_VALUE && value <= MAX_VALUE);
+    this._value = value;
   }
 
-  int operator &(int other) => this.code & other;
+  int operator &(int other) => this._value & other;
 
-  bool operator ==(other) => other is Char && this.code == other.code;
+  bool operator ==(other) => other is Char && this._value == other._value;
 
   int get code => _value;
 
   int toInt() => _value;
-}
-
-class Character {
-  static final int MIN_VALUE = 0;
-  static final int MAX_VALUE = 0xffff;
 }
 
 class Byte {

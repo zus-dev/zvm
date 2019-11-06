@@ -34,21 +34,20 @@ class MemoryUtil {
   /// Converts the specified signed 16 bit [value] to an unsigned 16 bit value.
   static Char signedToUnsigned16(Short value) {
     var iv = value.toInt();
-    return Char(iv >= 0 ? iv : Character.MAX_VALUE + (iv + 1));
+    return Char(iv >= 0 ? iv : Char.MAX_VALUE + (iv + 1));
   }
 
   /// Converts the specified unsigned 16 bit [value] to a signed 16 bit value.
   static Short unsignedToSigned16(Char value) {
     var iv = value.toInt();
-    return Short(iv > Short.MAX_VALUE ? -(Character.MAX_VALUE - (iv - 1)) : iv);
+    return Short(iv > Short.MAX_VALUE ? -(Char.MAX_VALUE - (iv - 1)) : iv);
   }
 
   /// Converts the specified unsigned 8 bit value to a signed 8 bit value.
   /// If the value specified is actually a 16 bit value, only the lower 8 bit
   /// will be used.
   static Short unsignedToSigned8(Char value) {
-    int workvalue = value & 0xff;
-    return Short(
-        workvalue > Byte.MAX_VALUE ? -(255 - (workvalue - 1)) : workvalue);
+    int iv = value & 0xff;
+    return Short(iv > Byte.MAX_VALUE ? -(255 - (iv - 1)) : iv);
   }
 }
