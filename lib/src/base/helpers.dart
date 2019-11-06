@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import 'dart:typed_data';
+
 class Char {
   int code = 0;
 
@@ -10,12 +12,18 @@ class Char {
   }
 
   int operator &(int other) => this.code & other;
+
+  bool operator ==(other) => other is Char && this.code == other.code;
 }
 
 class ByteArray extends ListBase<int> {
   final List<int> delegate;
 
   ByteArray(this.delegate) : assert(delegate != null);
+
+  /// Creates a [ByteArray] of the specified [length] (in elements), all of
+  /// whose elements are initially zero.
+  ByteArray.length(int length) : delegate = Uint8List(length);
 
   int get length => delegate.length;
 

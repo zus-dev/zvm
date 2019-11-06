@@ -11,6 +11,8 @@ environment:
 #  path: ^1.6.0
 
 dev_dependencies:
+  # dartdoc https://pub.dev/packages/dartdoc
   pedantic: ^1.8.0
   test: ^1.6.0
   mockito: ^4.1.1
+
