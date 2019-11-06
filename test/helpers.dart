@@ -1,9 +1,11 @@
 import 'package:test/test.dart';
 import 'package:zvm/zvm.dart';
 
-void assertEquals<T>(T expected, T actual) {
-  if (actual is Char) {
-    expect(actual.code, equals(expected));
+void assertEquals(Object expected, Object actual) {
+  if (actual is Short && expected is int) {
+    expect(actual.toInt(), equals(expected));
+  }  else if (actual is Char && expected is int) {
+    expect(actual.toInt(), equals(expected));
   } else {
     expect(actual, equals(expected));
   }

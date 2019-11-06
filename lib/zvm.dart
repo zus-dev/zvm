@@ -8,5 +8,6 @@ export 'src/base/helpers.dart';
 export 'src/base/memory.dart';
 export 'src/base/default_memory.dart';
 export 'src/base/memory_section.dart';
+export 'src/base/memory_util.dart';
 
 // TODO: Export any libraries intended for clients of this package.

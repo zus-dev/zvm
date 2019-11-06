@@ -1,5 +1,5 @@
-import 'memory.dart';
 import 'helpers.dart';
+import 'memory.dart';
 
 /// This class is the default implementation for MemoryAccess.
 class DefaultMemory implements Memory {
@@ -21,12 +21,12 @@ class DefaultMemory implements Memory {
   }
 
   void writeUnsigned16(final int address, final Char value) {
-    data[address] = (byte)((value & 0xff00) >> 8);
-    data[address + 1] = (byte)(value & 0xff);
+    data[address] = (byte)((value.toInt() & 0xff00) >> 8);
+    data[address + 1] = (byte)(value.toInt() & 0xff);
   }
 
   void writeUnsigned8(final int address, final Char value) {
-    data[address] = (byte)(value & 0xff);
+    data[address] = (byte)(value.toInt() & 0xff);
   }
 
   void copyBytesToArray(
@@ -44,7 +44,8 @@ class DefaultMemory implements Memory {
     // This copy method might not be as efficient, because the source
     // memory object could be based on something else than a byte array
     for (int i = 0; i < numBytes; i++) {
-      data[dstOffset + i] = (byte)(srcMem.readUnsigned8(srcOffset + i) & 0xff);
+      data[dstOffset + i] =
+          (byte)(srcMem.readUnsigned8(srcOffset + i).toInt() & 0xff);
     }
   }
 
