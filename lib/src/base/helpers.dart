@@ -16,6 +16,19 @@ class Char {
     this._value = value;
   }
 
+  Char.of(String str) {
+    assert(str.length == 1);
+    var value = str.codeUnitAt(0);
+    assert(value >= MIN_VALUE && value <= MAX_VALUE);
+    this._value = value;
+  }
+
+  Char.at(String str, int index) {
+    var value = str.codeUnitAt(index);
+    assert(value >= MIN_VALUE && value <= MAX_VALUE);
+    this._value = value;
+  }
+
   int operator &(int other) => this._value & other;
 
   bool operator ==(other) => other is Char && this._value == other._value;
@@ -23,6 +36,11 @@ class Char {
   int get code => _value;
 
   int toInt() => _value;
+
+  @override
+  String toString() {
+    return String.fromCharCode(code);
+  }
 }
 
 class Byte {
@@ -42,10 +60,6 @@ class Short {
     _value = value;
   }
 
-  bool operator >=(int other) => _value >= other;
-
-  bool operator <=(int other) => _value <= other;
-
   int toInt() => _value;
 }
 
@@ -58,18 +72,24 @@ class ByteArray extends ListBase<int> {
   /// whose elements are initially zero.
   ByteArray.length(int length) : delegate = Uint8List(length);
 
+  @override
   int get length => delegate.length;
 
+  @override
   set length(int length) {
     delegate.length = length;
   }
 
+  @override
   void operator []=(int index, int value) => delegate[index] = value;
 
+  @override
   int operator [](int index) => delegate[index];
 
+  @override
   void add(int value) => delegate.add(value);
 
+  @override
   void addAll(Iterable<int> all) => delegate.addAll(all);
 }
 
@@ -82,4 +102,12 @@ int byte(int value) {
 
 void arraycopy(List src, int srcPos, List dest, int destPos, int length) {
   dest.setRange(destPos, length + destPos, src, srcPos);
+}
+
+String toHexStr(int value, [int width = 2]) {
+  if (value == null) {
+    return 'null';
+  }
+
+  return value.toRadixString(16).padLeft(width, '0');
 }

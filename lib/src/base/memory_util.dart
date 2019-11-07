@@ -1,6 +1,9 @@
 import 'helpers.dart';
 import 'memory.dart';
 
+Char toUnsigned16(int value) => MemoryUtil.toUnsigned16(value);
+
+
 /// Utility functions for address conversion.
 class MemoryUtil {
   /// Private constructor.

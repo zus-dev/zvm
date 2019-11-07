@@ -4,8 +4,6 @@ import 'package:zvm/zvm.dart';
 
 import '../helpers.dart';
 
-class MockMemory extends Mock implements Memory {}
-
 void main() {
   final int OFFSET = 36;
   MockMemory memory;

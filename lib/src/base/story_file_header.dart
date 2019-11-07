@@ -17,28 +17,28 @@ enum Attribute {
 }
 
 abstract class StoryFileHeader {
-  int RELEASE = 0x02;
-  int PROGRAM_START = 0x06;
-  int DICTIONARY = 0x08;
-  int OBJECT_TABLE = 0x0a;
-  int GLOBALS = 0x0c;
-  int STATIC_MEM = 0x0e;
-  int ABBREVIATIONS = 0x18;
-  int CHECKSUM = 0x1c;
-  int INTERPRETER_NUMBER = 0x1e;
-  int SCREEN_HEIGHT = 0x20;
-  int SCREEN_WIDTH = 0x21;
-  int SCREEN_WIDTH_UNITS = 0x22;
-  int SCREEN_HEIGHT_UNITS = 0x24;
-  int ROUTINE_OFFSET = 0x28;
-  int STATIC_STRING_OFFSET = 0x2a;
-  int DEFAULT_BACKGROUND = 0x2c;
-  int DEFAULT_FOREGROUND = 0x2d;
-  int TERMINATORS = 0x2e;
-  int OUTPUT_STREAM3_WIDTH = 0x30; // 16 bit
-  int STD_REVISION_MAJOR = 0x32;
-  int STD_REVISION_MINOR = 0x33;
-  int CUSTOM_ALPHABET = 0x34;
+  final int RELEASE = 0x02;
+  final int PROGRAM_START = 0x06;
+  final int DICTIONARY = 0x08;
+  final int OBJECT_TABLE = 0x0a;
+  final int GLOBALS = 0x0c;
+  final int STATIC_MEM = 0x0e;
+  final int ABBREVIATIONS = 0x18;
+  final int CHECKSUM = 0x1c;
+  final int INTERPRETER_NUMBER = 0x1e;
+  final int SCREEN_HEIGHT = 0x20;
+  final int SCREEN_WIDTH = 0x21;
+  final int SCREEN_WIDTH_UNITS = 0x22;
+  final int SCREEN_HEIGHT_UNITS = 0x24;
+  final int ROUTINE_OFFSET = 0x28;
+  final int STATIC_STRING_OFFSET = 0x2a;
+  final int DEFAULT_BACKGROUND = 0x2c;
+  final int DEFAULT_FOREGROUND = 0x2d;
+  final int TERMINATORS = 0x2e;
+  final int OUTPUT_STREAM3_WIDTH = 0x30; // 16 bit
+  final int STD_REVISION_MAJOR = 0x32;
+  final int STD_REVISION_MINOR = 0x33;
+  final int CUSTOM_ALPHABET = 0x34;
 
   /// Returns the story file version.
   int getVersion();
