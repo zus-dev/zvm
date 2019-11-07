@@ -1,4 +1,4 @@
-import 'helpers.dart';
+import '../helpers.dart';
 
 /// Attributes for the file header flags.
 enum Attribute {

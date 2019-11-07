@@ -1,4 +1,4 @@
-import 'helpers.dart';
+import '../helpers.dart';
 import 'memory.dart';
 
 /// This class is the default implementation for MemoryAccess.

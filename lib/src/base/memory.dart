@@ -1,4 +1,4 @@
-import 'helpers.dart';
+import '../helpers.dart';
 
 /// This class manages read and write access to the byte array which contains
 /// the story file data. It is the only means to read and manipulate the

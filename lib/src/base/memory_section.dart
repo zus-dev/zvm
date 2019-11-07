@@ -1,4 +1,4 @@
-import 'helpers.dart';
+import '../helpers.dart';
 import 'memory.dart';
 
 class MemorySection implements Memory {

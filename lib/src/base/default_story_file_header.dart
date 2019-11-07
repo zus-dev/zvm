@@ -1,4 +1,4 @@
-import 'helpers.dart';
+import '../helpers.dart';
 import 'memory.dart';
 import 'memory_util.dart';
 import 'story_file_header.dart';
