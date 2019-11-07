@@ -3,6 +3,11 @@ import 'memory.dart';
 
 Char toUnsigned16(int value) => MemoryUtil.toUnsigned16(value);
 
+int readUnsigned32(Memory memory, int address) =>
+    MemoryUtil.readUnsigned32(memory, address);
+
+void writeUnsigned32(Memory memory, final int address, final int value) =>
+    MemoryUtil.writeUnsigned32(memory, address, value);
 
 /// Utility functions for address conversion.
 class MemoryUtil {

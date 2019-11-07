@@ -16,9 +16,8 @@ class Char {
     this._value = value;
   }
 
-  Char.of(String str) {
-    assert(str.length == 1);
-    var value = str.codeUnitAt(0);
+  Char.of(String character) {
+    var value = codeOf(character);
     assert(value >= MIN_VALUE && value <= MAX_VALUE);
     this._value = value;
   }
@@ -98,6 +97,11 @@ int byte(int value) {
   assert((value | 0xff) ^ 0xff == 0);
   // TODO: Check and trim to the byte? e.g. value & 0xff
   return value;
+}
+
+int codeOf(String character) {
+  assert(character.length == 1);
+  return character.codeUnitAt(0);
 }
 
 void arraycopy(List src, int srcPos, List dest, int destPos, int length) {

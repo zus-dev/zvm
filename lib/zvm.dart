@@ -11,5 +11,7 @@ export 'src/base/memory_section.dart';
 export 'src/base/memory_util.dart';
 export 'src/base/story_file_header.dart';
 export 'src/base/default_story_file_header.dart';
+export 'src/iff/chunk.dart';
+export 'src/iff/default_chunk.dart';
 
 // TODO: Export any libraries intended for clients of this package.
