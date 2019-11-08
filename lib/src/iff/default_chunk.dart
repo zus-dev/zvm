@@ -36,8 +36,8 @@ class DefaultChunk extends Chunk {
   DefaultChunk.forWrite(final ByteArray id, final ByteArray chunkdata) {
     _id = id;
     _chunkSize = chunkdata.length;
-    final ByteArray chunkDataWithHeader =
-        ByteArray.length(_chunkSize + Chunk.CHUNK_HEADER_LENGTH);
+    final dataWithHeaderLength = _chunkSize + Chunk.CHUNK_HEADER_LENGTH;
+    final chunkDataWithHeader = ByteArray.length(dataWithHeaderLength);
     _memory = DefaultMemory(chunkDataWithHeader);
     _memory.copyBytesFromArray(id, 0, 0, id.length);
     writeUnsigned32(_memory, id.length, _chunkSize);
