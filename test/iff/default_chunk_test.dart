@@ -16,7 +16,7 @@ void main() {
     assertEquals('O', mem.readUnsigned8(1));
     assertEquals('R', mem.readUnsigned8(2));
     assertEquals('M', mem.readUnsigned8(3));
-    assertEquals(3, MemoryUtil.readUnsigned32(mem, 4));
+    assertEquals(3, readUnsigned32(mem, 4));
     assertEquals(0x01, mem.readUnsigned8(8));
     assertEquals(0x02, mem.readUnsigned8(9));
     assertEquals(0x03, mem.readUnsigned8(10));
