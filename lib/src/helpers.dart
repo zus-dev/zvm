@@ -115,3 +115,8 @@ String toHexStr(int value, [int width = 2]) {
 
   return value.toRadixString(16).padLeft(width, '0');
 }
+
+class IOException implements Exception {
+  String cause;
+  IOException(this.cause);
+}
