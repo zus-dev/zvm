@@ -71,6 +71,8 @@ class ByteArray extends ListBase<int> {
   /// whose elements are initially zero.
   ByteArray.length(int length) : delegate = Uint8List(length);
 
+  ByteArray.fromString(String str) : delegate = _getBytes(str);
+
   @override
   int get length => delegate.length;
 
@@ -90,6 +92,24 @@ class ByteArray extends ListBase<int> {
 
   @override
   void addAll(Iterable<int> all) => delegate.addAll(all);
+
+  String getString() {
+    // must be symmetrical to ByteArray.fromString
+    return String.fromCharCodes(delegate);
+  }
+
+  static List<int> _getBytes(String str) {
+    // 1:
+    // List<int> bytes = utf8.encode('Hello world');
+    // String bar = utf8.decode(bytes);
+    // 2:
+    // String foo = 'Hello world';
+    // List<int> bytes = foo.codeUnits;
+    // 3:
+    // Iterable<int> bytes = foo.runes;
+    // print(bytes.toList());
+    return Uint8List.fromList(str.codeUnits);
+  }
 }
 
 int byte(int value) {

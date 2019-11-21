@@ -1,6 +1,8 @@
 /// Support for doing something awesome.
 ///
-/// More dartdocs go here.
+/// sub-packages:
+/// base - This package contains some fundamental interfaces and classes.
+/// iff - This package contains classes for reading and writing IFF files.
 library zvm;
 
 export 'src/zvm_base.dart';
@@ -15,5 +17,6 @@ export 'src/iff/chunk.dart';
 export 'src/iff/default_chunk.dart';
 export 'src/iff/default_form_chunk.dart';
 export 'src/iff/form_chunk.dart';
+export 'src/iff/writable_form_chunk.dart';
 
 // TODO: Export any libraries intended for clients of this package.

@@ -51,7 +51,7 @@ class DefaultChunk extends Chunk {
 
   @override
   String getId() {
-    return String.fromCharCodes(_id);
+    return _id.getString();
   }
 
   @override

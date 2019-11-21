@@ -58,7 +58,7 @@ class DefaultFormChunk extends DefaultChunk implements FormChunk {
 
   @override
   String getSubId() {
-    return String.fromCharCodes(_subId);
+    return _subId.getString();
   }
 
   @override
