@@ -1,9 +1,9 @@
+import '../base/memory.dart';
+import '../base/memory_section.dart';
+import '../helpers.dart';
 import 'chunk.dart';
 import 'default_chunk.dart';
 import 'form_chunk.dart';
-import '../helpers.dart';
-import '../base/memory.dart';
-import '../base/memory_section.dart';
 
 /// This class implements the FormChunk interface.
 class DefaultFormChunk extends DefaultChunk implements FormChunk {

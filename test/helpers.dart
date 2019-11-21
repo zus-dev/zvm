@@ -34,3 +34,11 @@ void assertNotSame<T>(T unexpected, T actual) {
 void assertSame(Object expected, Object actual) {
   expect(actual, same(expected));
 }
+
+void assertNotNull(Object actual) {
+  expect(actual, isNotNull);
+}
+
+void assertNull(Object actual) {
+  expect(actual, isNull);
+}

@@ -119,4 +119,5 @@ String toHexStr(int value, [int width = 2]) {
 class IOException implements Exception {
   String cause;
   IOException(this.cause);
+  String getMessage() => cause;
 }

@@ -24,17 +24,8 @@ void main() {
 
   test('CreateChunkForReading', () {
     var data = ByteArray([
-      codeOf('F'),
-      codeOf('O'),
-      codeOf('R'),
-      codeOf('M'),
-      0x00,
-      0x00,
-      0x00,
-      0x03,
-      0x01,
-      0x02,
-      0x03
+      codeOf('F'), codeOf('O'), codeOf('R'), codeOf('M'), //
+      0x00, 0x00, 0x00, 0x03, 0x01, 0x02, 0x03
     ]);
     var mem = DefaultMemory(data);
     var chunk = DefaultChunk.forRead(mem, 1234);
