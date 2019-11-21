@@ -37,9 +37,9 @@ class Char {
   int toInt() => _value;
 
   @override
-  String toString() {
-    return String.fromCharCode(code);
-  }
+  String toString() => String.fromCharCode(code);
+
+  Char toLowerCase() => Char.of(toString().toLowerCase());
 }
 
 class Byte {

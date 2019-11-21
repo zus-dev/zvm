@@ -1,9 +1,10 @@
-/// Support for doing something awesome.
+/// ZVM package
 ///
 /// sub-packages:
-/// base - This package contains some fundamental interfaces and classes.
-/// iff - This package contains classes for reading and writing IFF files.
-/// io - This package contains the classes related to input and output streams.
+/// base - some fundamental interfaces and classes.
+/// iff - classes for reading and writing IFF files.
+/// io - classes related to input and output streams.
+/// encoding - classes that are related to Z string encoding and decoding.
 library zvm;
 
 export 'src/zvm_base.dart';
@@ -20,5 +21,7 @@ export 'src/iff/default_form_chunk.dart';
 export 'src/iff/form_chunk.dart';
 export 'src/iff/writable_form_chunk.dart';
 export 'src/io/input_stream.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/encoding/accent_table.dart';
+export 'src/encoding/default_accent_table.dart';
+export 'src/encoding/i_zscii_encoding.dart';
+export 'src/encoding/zscii_encoding.dart';
