@@ -17,6 +17,7 @@ export 'src/encoding/accent_table.dart';
 export 'src/encoding/alphabet_table.dart';
 export 'src/encoding/alphabet_table_v1.dart';
 export 'src/encoding/alphabet_table_v2.dart';
+export 'src/encoding/custom_accent_table.dart';
 export 'src/encoding/default_accent_table.dart';
 export 'src/encoding/default_alphabet_table.dart';
 export 'src/encoding/i_zscii_encoding.dart';
