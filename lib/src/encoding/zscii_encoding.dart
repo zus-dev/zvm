@@ -8,7 +8,7 @@ import '../../zvm.dart';
 ///
 /// This class has a non-modifiable state, so it can be shared throughout
 /// the whole application.
-class ZsciiEncoding extends IZsciiEncoding {
+class ZsciiEncoding implements IZsciiEncoding {
   AccentTable _accentTable; // private
 
   ZsciiEncoding(final AccentTable accentTable) {
@@ -40,6 +40,7 @@ class ZsciiEncoding extends IZsciiEncoding {
 
   /// Converts a ZSCII character to a unicode character. Will return
   /// '?' if the given character is not known.
+  @override
   Char getUnicodeChar(final Char zchar) {
     if (isAscii(zchar)) {
       return zchar;
@@ -64,6 +65,7 @@ class ZsciiEncoding extends IZsciiEncoding {
   }
 
   /// Converts the specified string into its ZSCII representation.
+  @override
   String convertToZscii(final String str) {
     var result = StringBuffer();
     for (int i = 0; i < str.length; i++) {
