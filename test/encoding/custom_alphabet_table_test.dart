@@ -5,7 +5,6 @@ import 'package:zvm/zvm.dart';
 import '../helpers.dart';
 
 void main() {
-  const ADDRESS = 4711;
   MockMemory memory;
   AlphabetTable alphabetTable;
 
