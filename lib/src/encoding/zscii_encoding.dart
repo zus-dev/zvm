@@ -52,7 +52,7 @@ class ZsciiEncoding implements IZsciiEncoding {
       }
     }
     if (zchar.toInt() == IZsciiEncoding.NULL) {
-      return Char.of('\0');
+      return Char.of('\u0000');
     }
     if (zchar.toInt() == IZsciiEncoding.NEWLINE ||
         zchar.toInt() == IZsciiEncoding.NEWLINE_10) {

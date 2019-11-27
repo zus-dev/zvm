@@ -23,7 +23,7 @@ abstract class ZCharDecoder {
   /// leaving the string in a state, that can not be decoded properly
   /// otherwise. If the provided [length] is 0, the semantics are
   /// equal to the method without the [length] parameter.
-  /// Length is the maximum [length] in bytes
+  /// Length is the maximum [length] in bytes.
   String decode2Zscii(Memory memory, int address, int length);
 
   /// Returns the number of Z encoded bytes at the specified string [address].

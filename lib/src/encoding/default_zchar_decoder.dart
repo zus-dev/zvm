@@ -177,8 +177,7 @@ class DefaultZCharDecoder implements ZCharDecoder {
       }
     } while (!isEndWord(zword));
 
-    final List<Char> result =
-        List<Char>.generate(byteList.length * 3, (_) => Char(0));
+    final result = List<Char>.generate(byteList.length * 3, (_) => Char(0));
     int i = 0;
     for (List<Char> triplet in byteList) {
       for (Char b in triplet) {

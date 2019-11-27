@@ -44,7 +44,7 @@ class DefaultZCharTranslator implements ZCharTranslator {
 
   @override
   Char translate(final Char zchar) {
-    if (_shift(zchar)) return Char.of('\0');
+    if (_shift(zchar)) return Char.of('\u0000');
 
     Char result = Char(0);
     if (_isInAlphabetRange(zchar)) {

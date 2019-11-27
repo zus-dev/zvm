@@ -5,6 +5,7 @@
 /// iff - classes for reading and writing IFF files.
 /// io - classes related to input and output streams.
 /// encoding - classes that are related to Z string encoding and decoding.
+/// vm - base structures for the Z machine, e.g. the main components such as the memory map, the object tree, the dictionary...
 library zvm;
 
 export 'src/base/default_memory.dart';
@@ -37,4 +38,5 @@ export 'src/iff/default_form_chunk.dart';
 export 'src/iff/form_chunk.dart';
 export 'src/iff/writable_form_chunk.dart';
 export 'src/io/input_stream.dart';
+export 'src/vm/abbreviations.dart';
 export 'src/zvm_base.dart';

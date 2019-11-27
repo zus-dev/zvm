@@ -48,7 +48,9 @@ void main() {
     assertEquals('z', encoding.getUnicodeChar(Char.of('z')));
     assertEquals('?', encoding.getUnicodeChar(Char.of('\u0007')));
     assertEquals('\n', encoding.getUnicodeChar(Char(IZsciiEncoding.NEWLINE)));
-    assertEquals('\0', encoding.getUnicodeChar(Char(IZsciiEncoding.NULL)));
+    assertEquals('\u0000', encoding.getUnicodeChar(Char(IZsciiEncoding.NULL)));
+    assertEquals('\x00', encoding.getUnicodeChar(Char(IZsciiEncoding.NULL)));
+    assertEquals(0, encoding.getUnicodeChar(Char(IZsciiEncoding.NULL)).toInt());
     assertEquals('?', encoding.getUnicodeChar(Char(IZsciiEncoding.DELETE)));
   });
 
