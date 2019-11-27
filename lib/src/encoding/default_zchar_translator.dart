@@ -5,7 +5,7 @@ class DefaultZCharTranslator implements ZCharTranslator {
   AlphabetTable _alphabetTable;
   Alphabet _currentAlphabet;
   Alphabet _lockAlphabet;
-  bool _shiftLock;
+  bool _shiftLock = false;
 
   DefaultZCharTranslator(final AlphabetTable alphabetTable) {
     this._alphabetTable = alphabetTable;

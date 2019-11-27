@@ -39,4 +39,5 @@ export 'src/iff/form_chunk.dart';
 export 'src/iff/writable_form_chunk.dart';
 export 'src/io/input_stream.dart';
 export 'src/vm/abbreviations.dart';
+export 'src/vm/dictionary_sizes_v4_to_v8.dart';
 export 'src/zvm_base.dart';

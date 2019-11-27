@@ -149,21 +149,21 @@ class ZCharEncoder {
 
 class EncodingState {
   Memory _memory;
-  int source; // protected
-  int _sourceStart;
-  int _maxLength;
-  int _numEntryBytes;
-  int _target;
-  int _targetStart;
+  int source = 0; // protected
+  int _sourceStart = 0;
+  int _maxLength = 0;
+  int _numEntryBytes = 0;
+  int _target = 0;
+  int _targetStart = 0;
 
   // currently public
   // currentWord represents the state of the current word the encoder is
   // working on. The encoder attempts to fill the three slots contained in
   // this word and later writes it to the target memory address
-  int currentWord;
+  int currentWord = 0;
 
   // The current slot position within currentWord, can be 0, 1 or 2
-  int wordPosition;
+  int wordPosition = 0;
 
   void init(
       Memory mem, int src, int trgt, int maxEntryBytes, int maxEntryChars) {
