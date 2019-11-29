@@ -6,6 +6,7 @@
 /// io - classes related to input and output streams.
 /// encoding - classes that are related to Z string encoding and decoding.
 /// vm - base structures for the Z machine, e.g. the main components such as the memory map, the object tree, the dictionary...
+/// instructions - classes related to instruction execution.
 library zvm;
 
 export 'src/base/default_memory.dart';
@@ -39,5 +40,12 @@ export 'src/iff/form_chunk.dart';
 export 'src/iff/writable_form_chunk.dart';
 export 'src/io/input_stream.dart';
 export 'src/vm/abbreviations.dart';
+export 'src/vm/cpu.dart';
 export 'src/vm/dictionary_sizes_v4_to_v8.dart';
+export 'src/vm/input.dart';
+export 'src/vm/instruction.dart';
+export 'src/vm/object_tree.dart';
+export 'src/vm/output.dart';
+export 'src/vm/routine_context.dart';
+export 'src/vm/routine_context.dart';
 export 'src/zvm_base.dart';
