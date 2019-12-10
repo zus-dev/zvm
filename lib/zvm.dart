@@ -59,6 +59,7 @@ export 'src/vm/cpu.dart';
 export 'src/vm/dictionary_sizes_v4_to_v8.dart';
 export 'src/vm/input.dart';
 export 'src/vm/instruction.dart';
+export 'src/vm/machine.dart';
 export 'src/vm/object_tree.dart';
 export 'src/vm/output.dart';
 export 'src/vm/portable_game_state.dart';

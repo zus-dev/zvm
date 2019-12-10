@@ -128,8 +128,7 @@ class ZCharEncoder {
 
   ///  Retrieves the upper 5 bit of the specified ZSCII character.
   static Char _getUpper5Bit(final Char zsciiChar) {
-    // TODO: return Char((zsciiChar.toInt() >>> 5) & 0x1f);
-    return Char((zsciiChar.toInt() >> 5) & 0x1f);
+    return Char(zeroFillRightShift(zsciiChar.toInt(), 5) & 0x1f);
   }
 
   ///  Retrieves the lower 5 bit of the specified ZSCII character.

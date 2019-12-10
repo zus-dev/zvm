@@ -28,6 +28,7 @@ class Char {
     this._value = value;
   }
 
+  // TODO: Remove this operator
   int operator &(int other) => this._value & other;
 
   bool operator ==(other) => other is Char && this._value == other._value;
@@ -136,8 +137,23 @@ String toHexStr(int value, [int width = 2]) {
   return value.toRadixString(16).padLeft(width, '0');
 }
 
+int zeroFillRightShift(int n, int amount) {
+  // https://stackoverflow.com/questions/11746504/how-to-do-zero-fill-right-shift-in-dart
+  // Zero-fill right shift requires a specific integer size.
+  // Since integers in Dart are of arbitrary precision the '>>>' operator doesn't make sense there.
+  // The easiest way to emulate a zero-fill right shift is to bit-and the number first.
+  // Example:
+  // (foo & 0xFFFF) >> 2 // 16 bit zero-fill shift
+  // (foo & 0xFFFFFFFF) >> 2 // 32 bit shift.
+  //
+  // That assumes you have 32-bit unsigned integers and that's ok if you do have.
+  return (n & 0xffffffff) >> amount;
+}
+
 class IOException implements Exception {
   String cause;
+
   IOException(this.cause);
+
   String getMessage() => cause;
 }
