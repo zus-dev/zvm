@@ -1,3 +1,5 @@
+import "dart:io";
+
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:zvm/zvm.dart';
@@ -41,4 +43,14 @@ void assertNotNull(Object actual) {
 
 void assertNull(Object actual) {
   expect(actual, isNull);
+}
+
+void assertArraysEquals(Iterable actual, Iterable expected) {
+  expect(actual, orderedEquals(expected));
+}
+
+ByteArray readTestFileAsByteArray(String fileName) {
+  final s = Platform.pathSeparator;
+  final testSaveFile = File('testfiles${s}${fileName}');
+  return ByteArray(testSaveFile.readAsBytesSync());
 }

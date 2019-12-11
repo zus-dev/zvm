@@ -472,7 +472,7 @@ class PortableGameState {
     byteBuffer.add(pvFlag);
 
     // returnvar
-    byteBuffer.add((byte)(discardResult ? 0 : stackFrame.returnVariable));
+    byteBuffer.add(byte(discardResult ? 0 : stackFrame.returnVariable.toInt()));
 
     // argspec
     byteBuffer.add(createArgSpecByte(stackFrame.args));
