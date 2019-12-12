@@ -9,6 +9,7 @@
 /// instructions - classes related to instruction execution.
 /// media - classes for implementing media access.
 /// windowing -  classes for representing interactive fiction text in a generic version.
+/// vmutil - base utilities for the Z machine, e.g. data conversion and random number generation.
 library zvm;
 
 export 'src/base/default_memory.dart';
@@ -69,6 +70,8 @@ export 'src/vm/output.dart';
 export 'src/vm/portable_game_state.dart';
 export 'src/vm/routine_context.dart';
 export 'src/vm/save_game_data_store.dart';
+export 'src/vmutil/random_generator.dart';
+export 'src/vmutil/ring_buffer.dart';
 export 'src/windowing/screen_model.dart';
 export 'src/windowing/screen_model6.dart';
 export 'src/windowing/status_line.dart';
