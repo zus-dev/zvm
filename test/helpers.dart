@@ -6,6 +6,16 @@ import 'package:zvm/zvm.dart';
 
 class MockMemory extends Mock implements Memory {}
 
+class MockZCharDecoder extends Mock implements ZCharDecoder {}
+
+class MockZCharEncoder extends Mock implements ZCharEncoder {}
+
+class MockMachine extends Mock implements Machine {}
+
+class MockStoryFileHeader extends Mock implements StoryFileHeader {}
+
+class MockAbbreviationsTable extends Mock implements AbbreviationsTable {}
+
 /// Asserts that two objects are equal. If expected and actual are null, they are considered equal.
 void assertEquals(Object expected, Object actual) {
   if (actual is Short && expected is int) {

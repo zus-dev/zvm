@@ -6,8 +6,6 @@ import 'package:zvm/zvm.dart';
 
 import '../helpers.dart';
 
-class MockAbbreviationsTable extends Mock implements AbbreviationsTable {}
-
 void main() {
   MockMemory memory;
   AbbreviationsTable abbrev;

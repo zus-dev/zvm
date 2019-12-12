@@ -4,10 +4,6 @@ import 'package:zvm/zvm.dart';
 
 import '../helpers.dart';
 
-class MockMachine extends Mock implements Machine {}
-
-class MockStoryFileHeader extends Mock implements StoryFileHeader {}
-
 int decodePcBytes(Char b0, Char b1, Char b2) {
   return ((b0.toInt() & 0xff) << 16) |
       ((b1.toInt() & 0xff) << 8) |
