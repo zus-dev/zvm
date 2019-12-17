@@ -22,6 +22,7 @@ class Char {
     this._value = value;
   }
 
+  // TODO: Add an extension to the String class.
   Char.at(String str, int index) {
     var value = str.codeUnitAt(index);
     assert(value >= MIN_VALUE && value <= MAX_VALUE);
