@@ -67,6 +67,7 @@ export 'src/vm/input.dart';
 export 'src/vm/input_functions.dart';
 export 'src/vm/instruction.dart';
 export 'src/vm/machine.dart';
+export 'src/vm/memory_output_stream.dart';
 export 'src/vm/object_tree.dart';
 export 'src/vm/output.dart';
 export 'src/vm/portable_game_state.dart';

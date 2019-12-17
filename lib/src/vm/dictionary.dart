@@ -1,8 +1,5 @@
-import '../../zvm.dart';
-
 /// This is the interface definition for a dictionary.
 abstract class Dictionary {
-
   /// Returns the number of separators.
   int getNumberOfSeparators();
 

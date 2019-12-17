@@ -179,6 +179,21 @@ int zeroFillRightShift(int n, int amount) {
   return (n & 0xffffffff) >> amount;
 }
 
+abstract class Closeable {
+  /// Closes this object and releases any resources associated with it.
+  void close();
+}
+
+// Source:
+// https://github.com/dart-lang/sdk/issues/32486
+void using<T extends Closeable>(T resource, void Function(T) fn) {
+  try {
+    fn(resource);
+  } finally {
+    resource.close();
+  }
+}
+
 class IOException implements Exception {
   String cause;
 

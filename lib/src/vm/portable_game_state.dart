@@ -403,16 +403,15 @@ class PortableGameState {
   WritableFormChunk exportToFormChunk() {
     final ByteArray id = ByteArray.fromString("IFZS");
     final WritableFormChunk formChunk = WritableFormChunk(id);
-    formChunk.addChunk(createIfhdChunk());
-    formChunk.addChunk(createUMemChunk());
-    formChunk.addChunk(createStksChunk());
+    formChunk.addChunk(_createIfhdChunk());
+    formChunk.addChunk(_createUMemChunk());
+    formChunk.addChunk(_createStksChunk());
 
     return formChunk;
   }
 
   /// Creates the IFhd chunk.
-  /// TODO: private
-  Chunk createIfhdChunk() {
+  Chunk _createIfhdChunk() {
     final ByteArray id = ByteArray.fromString("IFhd");
     final ByteArray data = ByteArray.length(13);
     final Chunk chunk = DefaultChunk.forWrite(id, data);
@@ -432,15 +431,13 @@ class PortableGameState {
   }
 
   /// Creates the UMem chunk.
-  /// TODO: private
-  Chunk createUMemChunk() {
+  Chunk _createUMemChunk() {
     final ByteArray id = ByteArray.fromString("UMem");
     return DefaultChunk.forWrite(id, dynamicMem);
   }
 
   /// Creates the Stks chunk.
-  /// TODO: private
-  Chunk createStksChunk() {
+  Chunk _createStksChunk() {
     final ByteArray id = ByteArray.fromString("Stks");
     final List<int> byteBuffer = List<int>();
 
@@ -475,35 +472,33 @@ class PortableGameState {
     byteBuffer.add(byte(discardResult ? 0 : stackFrame.returnVariable.toInt()));
 
     // argspec
-    byteBuffer.add(createArgSpecByte(stackFrame.args));
+    byteBuffer.add(_createArgSpecByte(stackFrame.args));
 
     // eval stack size
     final int stacksize = stackFrame.evalStack.length;
-    addUnsigned16ToByteBuffer(byteBuffer, Char(stacksize));
+    _addUnsigned16ToByteBuffer(byteBuffer, Char(stacksize));
 
     // local variables
     for (Char local in stackFrame.locals) {
-      addUnsigned16ToByteBuffer(byteBuffer, local);
+      _addUnsigned16ToByteBuffer(byteBuffer, local);
     }
 
     // stack values
     for (Char stackValue in stackFrame.evalStack) {
-      addUnsigned16ToByteBuffer(byteBuffer, stackValue);
+      _addUnsigned16ToByteBuffer(byteBuffer, stackValue);
     }
   }
 
   /// Appends unsigned 16 bit value to the byte buffer.
   /// [buffer] byte buffer
   /// [value] unsigned 16 bit value
-  /// TODO: private
-  void addUnsigned16ToByteBuffer(final List<int> buffer, final Char value) {
+  void _addUnsigned16ToByteBuffer(final List<int> buffer, final Char value) {
     buffer.add(byte(zeroFillRightShift((value.toInt() & 0xff00), 8)));
     buffer.add(byte(value.toInt() & 0xff));
   }
 
   /// Makes an arg spec byte from the arguments.
-  /// TODO: private
-  static int createArgSpecByte(final List<Char> args) {
+  static int _createArgSpecByte(final List<Char> args) {
     int result = 0;
     for (var arg in args) {
       result |= (1 << arg.toInt());

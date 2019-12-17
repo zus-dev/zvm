@@ -69,7 +69,7 @@ class StringTokenizer {
     int count = 0;
     bool inToken = false;
     for (int i = position, length = string.length; i < length; i++) {
-      if (delimiters.indexOf(string[i], 0) >= 0) {
+      if (delimiters.contains(string[i])) {
         if (returnDelimiters) count++;
         if (inToken) {
           count++;
@@ -102,7 +102,7 @@ class StringTokenizer {
 
       // otherwise find a character which is not a delimiter
       for (int i = position; i < length; i++) {
-        if (delimiters.indexOf(string[i], 0) == -1) {
+        if (!delimiters.contains(string[i])) {
           return true;
         }
       }
@@ -134,24 +134,24 @@ class StringTokenizer {
 
     if (i < length) {
       if (returnDelimiters) {
-        if (delimiters.indexOf(string[position], 0) >= 0) {
+        if (delimiters.contains(string[position])) {
           return string[position++];
         }
         for (position++; position < length; position++) {
-          if (delimiters.indexOf(string[position], 0) >= 0) {
+          if (delimiters.contains(string[position])) {
             return string.substring(i, position);
           }
         }
         return string.substring(i);
       }
 
-      while (i < length && delimiters.indexOf(string[i], 0) >= 0) {
+      while (i < length && delimiters.contains(string[i])) {
         i++;
       }
       position = i;
       if (i < length) {
         for (position++; position < length; position++) {
-          if (delimiters.indexOf(string[position], 0) >= 0) {
+          if (delimiters.contains(string[position])) {
             return string.substring(i, position);
           }
         }
