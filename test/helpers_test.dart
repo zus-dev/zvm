@@ -46,5 +46,10 @@ void main() {
     test('Byte to char', () {
       expect(Char((byte)(-1 & 0xff)).code, equals(255));
     });
+
+    test('isWhitespace', () {
+      expect(Char.of(' ').isWhitespace(), isTrue);
+      expect(Char.of('a').isWhitespace(), isFalse);
+    });
   });
 }
