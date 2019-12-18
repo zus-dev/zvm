@@ -73,6 +73,7 @@ export 'src/vm/instruction.dart';
 export 'src/vm/invalid_story_exception.dart';
 export 'src/vm/machine.dart';
 export 'src/vm/memory_output_stream.dart';
+export 'src/vm/modern_object_tree.dart';
 export 'src/vm/object_tree.dart';
 export 'src/vm/output.dart';
 export 'src/vm/output_impl.dart';
