@@ -70,6 +70,7 @@ export 'src/vm/input_functions.dart';
 export 'src/vm/input_impl.dart';
 export 'src/vm/input_line.dart';
 export 'src/vm/instruction.dart';
+export 'src/vm/invalid_story_exception.dart';
 export 'src/vm/machine.dart';
 export 'src/vm/memory_output_stream.dart';
 export 'src/vm/object_tree.dart';
