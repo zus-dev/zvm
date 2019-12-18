@@ -80,6 +80,7 @@ export 'src/vm/output_impl.dart';
 export 'src/vm/portable_game_state.dart';
 export 'src/vm/routine_context.dart';
 export 'src/vm/save_game_data_store.dart';
+export 'src/vm/user_dictionary.dart';
 export 'src/vmutil/fast_short_stack.dart';
 export 'src/vmutil/predictable_random_generator.dart';
 export 'src/vmutil/random_generator.dart';
