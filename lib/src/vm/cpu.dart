@@ -1,6 +1,7 @@
 import '../../zvm.dart';
 
 /// The possible variable types.
+// NOTE: Alternative name can be CpuVariableType
 enum VariableType { STACK, LOCAL, GLOBAL }
 
 /// Cpu interface.

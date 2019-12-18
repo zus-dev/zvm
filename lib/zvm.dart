@@ -93,3 +93,4 @@ export 'src/windowing/text_annotation.dart';
 export 'src/windowing/text_cursor.dart';
 export 'src/windowing/window6.dart';
 export 'src/zvm_base.dart';
+export 'src/vm/cpu_impl.dart';
