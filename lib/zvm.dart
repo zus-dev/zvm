@@ -58,6 +58,7 @@ export 'src/media/zmpp_image.dart';
 export 'src/string_tokenizer.dart';
 export 'src/vm/abbreviations.dart';
 export 'src/vm/abstract_dictionary.dart';
+export 'src/vm/abstract_object_tree.dart';
 export 'src/vm/cpu.dart';
 export 'src/vm/default_dictionary.dart';
 export 'src/vm/dictionary.dart';
