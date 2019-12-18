@@ -49,6 +49,9 @@ void main() {
 
     test('isWhitespace', () {
       expect(Char.of(' ').isWhitespace(), isTrue);
+      expect(Char.of('\n').isWhitespace(), isTrue);
+      expect(Char.of('\t').isWhitespace(), isTrue);
+      expect(Char.of('\r').isWhitespace(), isTrue);
       expect(Char.of('a').isWhitespace(), isFalse);
     });
   });

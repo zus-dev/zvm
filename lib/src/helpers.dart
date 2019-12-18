@@ -158,12 +158,16 @@ void arraycopy(List src, int srcPos, List dest, int destPos, int length) {
   dest.setRange(destPos, length + destPos, src, srcPos);
 }
 
-String toHexStr(int value, [int width = 2]) {
+String toHexStrPad4Space(int value) {
+  return toHexStr(value, width: 4, padding: ' ');
+}
+
+String toHexStr(int value, {int width = 2, String padding = '0'}) {
   if (value == null) {
     return 'null';
   }
 
-  return value.toRadixString(16).padLeft(width, '0');
+  return value.toRadixString(16).padLeft(width, padding);
 }
 
 int zeroFillRightShift(int n, int amount) {
@@ -202,7 +206,15 @@ class Logger {
   }
 
   void severe(String message) {
-    print("${_name}: $message");
+    print("SEVR: ${_name}: $message");
+  }
+
+  void warning(String message) {
+    print("WARN: ${_name}: $message");
+  }
+
+  void info(String message) {
+    print("INFO: ${_name}: $message");
   }
 }
 
@@ -237,4 +249,28 @@ class IllegalStateException implements Exception {
   IllegalStateException(this.cause);
 
   String getMessage() => cause;
+}
+
+/// The Runnable interface should be implemented by any class whose instances
+/// are intended to be executed by a thread. The class must define a method
+/// of no arguments called run.
+abstract class Runnable {
+  void run();
+}
+
+
+/// TODO: Implement me!
+/// https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html
+class ExecutorService {
+  void submit(Runnable task) {
+    print("NEW RUNNABLE TASK HAS BEEN SUBMITTED!");
+  }
+}
+
+/// TODO: Implement me!
+/// https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html
+class Executors {
+  static ExecutorService newSingleThreadExecutor() {
+    return ExecutorService();
+  }
 }

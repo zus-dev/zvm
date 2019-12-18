@@ -2,31 +2,31 @@
 /// project.
 abstract class SoundSystem {
   ///  High pitched bleep.
-  int BLEEP_HIGH = 1;
+  static const int BLEEP_HIGH = 1;
 
   ///  Low pitched bleep.
-  int BLEEP_LOW = 2;
+  static const int BLEEP_LOW = 2;
 
   ///  Prepares a sound.
-  int EFFECT_PREPARE = 1;
+  static const int EFFECT_PREPARE = 1;
 
   ///  Starts a sound.
-  int EFFECT_START = 2;
+  static const int EFFECT_START = 2;
 
   ///  Stops a sound.
-  int EFFECT_STOP = 3;
+  static const int EFFECT_STOP = 3;
 
   ///  Finishes a sound.
-  int EFFECT_FINISH = 4;
+  static const int EFFECT_FINISH = 4;
 
   ///  The maximum value for volume.
-  int VOLUME_MAX = 0;
+  static const int VOLUME_MAX = 0;
 
   ///  The minimum value for volume.
-  int VOLUME_MIN = 255;
+  static const int VOLUME_MIN = 255;
 
   ///  Sets the volume to default.
-  int VOLUME_DEFAULT = -1;
+  static const int VOLUME_DEFAULT = -1;
 
   /// Plays a sound.
   /// Params:

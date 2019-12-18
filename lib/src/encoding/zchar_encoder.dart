@@ -103,8 +103,7 @@ class ZCharEncoder {
 
   ///  Returns the number of remaining slots.
   static int _getNumRemainingSlots(final EncodingState state) {
-    // TODO: check if floor is correct!
-    final int currentWord = (state.getTargetOffset() / 2).floor();
+    final int currentWord = state.getTargetOffset() ~/ 2;
     return ((2 - currentWord) * 3) + (3 - state.wordPosition);
   }
 
