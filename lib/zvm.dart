@@ -93,6 +93,7 @@ export 'src/vmutil/predictable_random_generator.dart';
 export 'src/vmutil/random_generator.dart';
 export 'src/vmutil/ring_buffer.dart';
 export 'src/vmutil/unpredictable_random_generator.dart';
+export 'src/windowing/annotated_character.dart';
 export 'src/windowing/screen_model.dart';
 export 'src/windowing/screen_model6.dart';
 export 'src/windowing/status_line.dart';
