@@ -78,6 +78,7 @@ class Byte {
 }
 
 /// Signed 16 bit value
+/// TODO: Delete me!
 class Short {
   static final int MIN_VALUE = -pow(2, 15);
   static final int MAX_VALUE = pow(2, 15) - 1;

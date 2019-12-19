@@ -20,6 +20,8 @@ class MockAbbreviationsTable extends Mock implements AbbreviationsTable {}
 void assertEquals(Object expected, Object actual) {
   if (actual is Short && expected is int) {
     expect(actual.toInt(), equals(expected));
+  } else if (actual is int && expected is Char) {
+    expect(actual, expected.toInt());
   } else if (actual is Char && expected is int) {
     expect(actual.toInt(), equals(expected));
   } else if (actual is Char && expected is String) {
