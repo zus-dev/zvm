@@ -7,13 +7,13 @@ abstract class ScreenModel {
   static final int WINDOW_TOP = 1;
 
   /// Font number for the standard font.
-  Char FONT_NORMAL = Char(1);
+  static final Char FONT_NORMAL = Char(1);
 
   /// Font number for the character graphics font.
-  Char FONT_CHARACTER_GRAPHICS = Char(3);
+  static final Char  FONT_CHARACTER_GRAPHICS = Char(3);
 
   /// Font number for the fixed pitch font.
-  Char FONT_FIXED = Char(4);
+  static final Char FONT_FIXED = Char(4);
 
   static const int TEXTSTYLE_ROMAN = 0;
   static const int TEXTSTYLE_REVERSE_VIDEO = 1;
