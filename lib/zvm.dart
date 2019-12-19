@@ -10,6 +10,7 @@
 /// media - classes for implementing media access.
 /// windowing -  classes for representing interactive fiction text in a generic version.
 /// vmutil - base utilities for the Z machine, e.g. data conversion and random number generation.
+/// blorb - classes for implementing the Blorb standard. It offers implementations for the MediaCollection interfaces.
 library zvm;
 
 export 'src/base/default_memory.dart';
@@ -19,6 +20,13 @@ export 'src/base/memory.dart';
 export 'src/base/memory_section.dart';
 export 'src/base/memory_util.dart';
 export 'src/base/story_file_header.dart';
+export 'src/blorb/blorb_cover_art.dart';
+export 'src/blorb/blorb_file.dart';
+export 'src/blorb/blorb_image.dart';
+export 'src/blorb/blorb_media_collection.dart';
+export 'src/blorb/native_image.dart';
+export 'src/blorb/native_image_factory.dart';
+export 'src/blorb/sound_effect_factory.dart';
 export 'src/encoding/accent_table.dart';
 export 'src/encoding/alphabet_element.dart';
 export 'src/encoding/alphabet_table.dart';
