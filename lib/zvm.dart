@@ -95,6 +95,7 @@ export 'src/vmutil/ring_buffer.dart';
 export 'src/vmutil/unpredictable_random_generator.dart';
 export 'src/windowing/annotated_character.dart';
 export 'src/windowing/annotated_text.dart';
+export 'src/windowing/buffered_screen_model.dart';
 export 'src/windowing/buffered_text_window.dart';
 export 'src/windowing/screen_model.dart';
 export 'src/windowing/screen_model6.dart';

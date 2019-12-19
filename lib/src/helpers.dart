@@ -235,7 +235,6 @@ class IllegalArgumentException implements Exception {
   String getMessage() => cause;
 }
 
-
 class ArrayIndexOutOfBoundsException implements Exception {
   String cause;
 
@@ -252,10 +251,16 @@ class IllegalStateException implements Exception {
   String getMessage() => cause;
 }
 
-/// Serializable interface
-abstract class Serializable {
+class UnsupportedOperationException implements Exception {
+  String cause;
 
+  UnsupportedOperationException(this.cause);
+
+  String getMessage() => cause;
 }
+
+/// Serializable interface
+abstract class Serializable {}
 
 /// The Runnable interface should be implemented by any class whose instances
 /// are intended to be executed by a thread. The class must define a method
@@ -263,7 +268,6 @@ abstract class Serializable {
 abstract class Runnable {
   void run();
 }
-
 
 /// TODO: Implement me!
 /// https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html
