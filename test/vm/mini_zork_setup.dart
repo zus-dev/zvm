@@ -9,7 +9,7 @@ class MiniZorkSetup {
   ZCharDecoder converter;
   StoryFileHeader fileheader;
   Abbreviations abbreviations;
-  MachineImpl machine;
+  Machine machine;
 
   void setUp() {
     machine = MachineTestUtil.createMachine("minizork.z3");
