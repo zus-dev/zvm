@@ -2,12 +2,12 @@ import '../../zvm.dart';
 
 /// An annotated text.
 class AnnotatedText implements Serializable {
-  TextAnnotation annotation;
-  String text;
+  TextAnnotation _annotation;
+  String _text;
 
   AnnotatedText(TextAnnotation annotation, String text) {
-    this.annotation = annotation;
-    this.text = text;
+    _annotation = annotation;
+    _text = text;
   }
 
   AnnotatedText.fromString(String text)
@@ -18,11 +18,11 @@ class AnnotatedText implements Serializable {
 
   /// Returns the annotation.
   TextAnnotation getAnnotation() {
-    return annotation;
+    return _annotation;
   }
 
   /// Returns the text.
   String getText() {
-    return text;
+    return _text;
   }
 }

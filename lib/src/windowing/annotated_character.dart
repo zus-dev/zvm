@@ -8,8 +8,8 @@ class AnnotatedCharacter implements Serializable {
   
   /// Constructor.
   AnnotatedCharacter(TextAnnotation annotation, Char c) {
-    this._annotation = annotation;
-    this._character = c;
+    _annotation = annotation;
+    _character = c;
   }
   
   /// Returns the annotation.
