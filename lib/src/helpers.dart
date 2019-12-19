@@ -252,6 +252,11 @@ class IllegalStateException implements Exception {
   String getMessage() => cause;
 }
 
+/// Serializable interface
+abstract class Serializable {
+
+}
+
 /// The Runnable interface should be implemented by any class whose instances
 /// are intended to be executed by a thread. The class must define a method
 /// of no arguments called run.

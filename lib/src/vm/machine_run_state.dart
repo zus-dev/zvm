@@ -4,7 +4,7 @@ enum ReadMode { NONE, READ_CHAR, READ_LINE }
 
 /// This class models a machine run state that also stores data for timed
 /// input, so a client application can call an interrupt method on the machine.
-class MachineRunState {
+class MachineRunState implements Serializable {
   /// Reading modes.
   int _time = 0;
   int _numLeftOverChars = 0;

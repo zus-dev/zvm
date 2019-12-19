@@ -1,7 +1,7 @@
 import '../../zvm.dart';
 
 /// An annotation to indicate how a sequence of characters should be printed.
-class TextAnnotation {
+class TextAnnotation implements Serializable {
   // Font flags have the same bit layout as in the ScreenModel interface so
   // so the flags are compatible
   static final Char FONT_NORMAL = Char(1);

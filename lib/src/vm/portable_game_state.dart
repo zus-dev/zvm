@@ -1,7 +1,7 @@
 import '../../zvm.dart';
 
 /// This class represents a stack frame in the portable game state model.
-class StackFrame {
+class StackFrame implements Serializable  {
   /// The return program counter.
   int pc = 0;
 
@@ -70,7 +70,7 @@ class StackFrame {
 
 /// This class represents the state of the Z machine in an external format,
 /// so it can be exchanged using the Quetzal IFF format.
-class PortableGameState {
+class PortableGameState implements Serializable {
   /// The return variable value for discard result.
   static final Char DISCARD_RESULT = Char(0xffff);
 
