@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:zvm/zvm.dart';
 
+import 'helpers.dart';
+
 void main() {
   group('Char', () {
     test('Constructor', () {
@@ -53,6 +55,11 @@ void main() {
       expect(Char.of('\t').isWhitespace(), isTrue);
       expect(Char.of('\r').isWhitespace(), isTrue);
       expect(Char.of('a').isWhitespace(), isFalse);
+    });
+
+    test('Char comparison', () {
+      Char c = Char.of('\n');
+      assertTrue(c.toString() == '\n');
     });
   });
 }
