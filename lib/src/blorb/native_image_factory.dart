@@ -4,5 +4,5 @@ import '../../zvm.dart';
 /// a block of data.
 abstract class NativeImageFactory {
   /// Creates a NativeImage from an InputStream.
-  NativeImage createImage(InputStream inputStream);
+  NativeImage createImage(JavaInputStream inputStream);
 }
