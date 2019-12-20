@@ -217,6 +217,10 @@ class Logger {
   void info(String message) {
     print("INFO: ${_name}: $message");
   }
+
+  void throwing(String className, String methodName, Object err) {
+    print("TROW: ${_name}: ${className}: ${methodName}: ${err}");
+  }
 }
 
 class IOException implements Exception {
@@ -283,4 +287,47 @@ class Executors {
   static ExecutorService newSingleThreadExecutor() {
     return ExecutorService();
   }
+}
+
+// TODO: Delete me!
+class Attributes {
+}
+
+// TODO: SAX XML parser
+abstract class DefaultHandler {
+  void startElement(final String uri, final String localName,
+      final String qname, final Attributes attributes);
+
+  void endElement(final String uri, final String localName,
+      final String qname);
+
+  void characters(final List<Char> ch, final int start, final int length);
+}
+
+
+class SAXParser{
+  void parse(Object meminput, Object handler) {
+    // TODO: implement me!
+    throw UnimplementedError();
+  }
+}
+
+class SAXParserFactory {
+  SAXParserFactory.newInstance();
+
+  SAXParser newSAXParser() {
+    return SAXParser();
+  }
+}
+
+/// This abstract class is the superclass of all classes representing an input stream of bytes.
+/// Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input.
+/// https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html
+/// TODO: Fix me!
+abstract class JavaInputStream {
+  int read();
+
+  void mark(final int readLimit);
+
+  void reset();
 }

@@ -24,6 +24,7 @@ export 'src/blorb/blorb_cover_art.dart';
 export 'src/blorb/blorb_file.dart';
 export 'src/blorb/blorb_image.dart';
 export 'src/blorb/blorb_media_collection.dart';
+export 'src/blorb/memory_input_stream.dart';
 export 'src/blorb/native_image.dart';
 export 'src/blorb/native_image_factory.dart';
 export 'src/blorb/sound_effect_factory.dart';
