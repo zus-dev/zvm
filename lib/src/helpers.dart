@@ -163,6 +163,30 @@ String toHexStrPad4Space(int value) {
   return toHexStr(value, width: 4, padding: ' ');
 }
 
+/// $%04x
+String toS04x(Char value){
+  return "\$" + toHexStr(value.toInt(), width: 4, padding: '0');
+}
+
+/// $%02x
+String toS02x(Char value){
+  return "\$" + toHexStr(value.toInt(), width: 2, padding: '0');
+}
+
+/// L%02x
+String toL02x(int value) {
+  return toHex02x("L", value);
+}
+
+/// G%02x
+String toG02x(int value) {
+  return toHex02x("G", value);
+}
+
+String toHex02x(String prefix, int value){
+  return prefix + toHexStr(value, width: 2, padding: '0');
+}
+
 String toHexStr(int value, {int width = 2, String padding = '0'}) {
   if (value == null) {
     return 'null';

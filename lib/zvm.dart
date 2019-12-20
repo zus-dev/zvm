@@ -11,6 +11,7 @@
 /// windowing -  classes for representing interactive fiction text in a generic version.
 /// vmutil - base utilities for the Z machine, e.g. data conversion and random number generation.
 /// blorb - classes for implementing the Blorb standard. It offers implementations for the MediaCollection interfaces.
+/// instructions - classes related to instruction execution.
 library zvm;
 
 export 'src/base/default_memory.dart';
@@ -55,6 +56,9 @@ export 'src/iff/default_chunk.dart';
 export 'src/iff/default_form_chunk.dart';
 export 'src/iff/form_chunk.dart';
 export 'src/iff/writable_form_chunk.dart';
+export 'src/instructions/abstract_instruction.dart';
+export 'src/instructions/instruction_info_db.dart';
+export 'src/instructions/operand.dart';
 export 'src/io/input_stream.dart';
 export 'src/io/output_stream.dart';
 export 'src/media/drawing_area.dart';
