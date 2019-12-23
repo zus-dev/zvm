@@ -2,10 +2,10 @@ import '../../zvm.dart';
 
 /// Branch information.
 class BranchInfo {
-  bool branchOnTrue;
-  int numOffsetBytes;
-  int addressAfterBranchData;
-  int branchOffset;
+  bool branchOnTrue = false;
+  int numOffsetBytes = 0;
+  int addressAfterBranchData = 0;
+  int branchOffset = 0;
 
   BranchInfo(bool branchOnTrue, int numOffsetBytes, int addressAfterBranchData,
       int branchOffset) {
@@ -20,20 +20,20 @@ class BranchInfo {
 /// Goes with the NewInstructionDecoder.
 abstract class AbstractInstruction implements Instruction {
   Machine _machine;
-  int _opcodeNum;
+  int _opcodeNum = 0;
   List<Operand> _operands;
-  Char _storeVariable;
+  Char _storeVariable = Char(0);
   BranchInfo _branchInfo;
-  int _opcodeLength;
+  int _opcodeLength = 0;
 
   AbstractInstruction(Machine machine, int opcodeNum, List<Operand> operands,
       Char storeVar, BranchInfo branchInfo, int opcodeLength) {
     _machine = machine;
     _opcodeNum = opcodeNum;
-    _operands = _operands;
+    _operands = operands;
     _storeVariable = storeVar;
-    _branchInfo = _branchInfo;
-    _opcodeLength = _opcodeLength;
+    _branchInfo = branchInfo;
+    _opcodeLength = opcodeLength;
   }
 
   /// Returns the machine object.

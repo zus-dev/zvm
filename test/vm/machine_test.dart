@@ -11,12 +11,6 @@ class MockScreenModel extends Mock implements ScreenModel {}
 
 class MockSaveGameDataStore extends Mock implements SaveGameDataStore {}
 
-class MockOutputStream extends Mock implements OutputStream {
-  String name;
-
-  MockOutputStream(this.name);
-}
-
 class MockInputStream extends Mock implements InputStream {
   String name;
 

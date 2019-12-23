@@ -16,10 +16,20 @@ class MockStoryFileHeader extends Mock implements StoryFileHeader {}
 
 class MockAbbreviationsTable extends Mock implements AbbreviationsTable {}
 
+class MockOutputStream extends Mock implements OutputStream {
+  String name;
+
+  MockOutputStream([this.name = ""]);
+}
+
+class MockDictionary extends Mock implements Dictionary {}
+
 /// Asserts that two objects are equal. If expected and actual are null, they are considered equal.
 void assertEquals(Object expected, Object actual) {
   if (actual is Short && expected is int) {
     expect(actual.toInt(), equals(expected));
+  } else if (actual is int && expected is Short) {
+    expect(actual, equals(expected.toInt()));
   } else if (actual is int && expected is Char) {
     expect(actual, expected.toInt());
   } else if (actual is Char && expected is int) {
