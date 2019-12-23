@@ -30,11 +30,11 @@ void main() {
   });
 
   test('SignedToUnsigned16', () {
-    assertEquals(0, signedToUnsigned16(Short(0)));
-    assertEquals(Char(0xffff), signedToUnsigned16(Short(-1)));
-    assertEquals(Char(0xfffe), signedToUnsigned16(Short(-2)));
-    assertEquals(Char(32767), signedToUnsigned16(Short(32767)));
-    assertEquals(Char(32768), signedToUnsigned16(Short(-32768)));
+    assertEquals(0, signedToUnsigned16(0));
+    assertEquals(Char(0xffff), signedToUnsigned16(-1));
+    assertEquals(Char(0xfffe), signedToUnsigned16(-2));
+    assertEquals(Char(32767), signedToUnsigned16(32767));
+    assertEquals(Char(32768), signedToUnsigned16(-32768));
   });
 
   test('UnsignedToSigned16', () {

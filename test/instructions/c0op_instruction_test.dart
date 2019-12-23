@@ -43,8 +43,6 @@ class C0OpMock extends C0OpInstruction {
 
 void main() {
   MockMachine machine;
-  MockOutputStream outputStream;
-  MockDictionary dictionary;
 
   void setupStoryVersion(final int version) {
     when(machine.getVersion()).thenReturn(version);
@@ -56,31 +54,7 @@ void main() {
 
   setUp(() {
     machine = MockMachine();
-    outputStream = MockOutputStream();
-    dictionary = MockDictionary();
   });
-
-  /*
-  C0OpMock createInstructionMock(int opcode) {
-    return createInstructionMock(machine, opcode);
-  }
-
-  C0OpMock createInstructionMock(int opcode, Char storeVar) {
-    C0OpMock result = C0OpMock(machine, opcode, storeVar);
-    return result;
-  }
-
-  C0OpMock createInstructionMock(int opcode, String str) {
-    C0OpMock result = C0OpMock(machine, opcode, str);
-    return result;
-  }
-
-  C0OpMock createInstructionMock(Machine machine,
-  		int opcode) {
-    C0OpMock result = C0OpMock(machine, opcode);
-    return result;
-  }
-  */
 
   test('IsBranchV3', () {
     InstructionInfoDb infoDb = InstructionInfoDb.getInstance();

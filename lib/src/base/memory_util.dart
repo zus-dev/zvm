@@ -26,21 +26,21 @@ void writeUnsigned32(Memory memory, final int address, final int value) {
 }
 
 /// Converts the specified signed 16 bit [value] to an unsigned 16 bit value.
-Char signedToUnsigned16(Short value) {
+Char signedToUnsigned16(int value) {
   var iv = value.toInt();
   return Char(iv >= 0 ? iv : Char.MAX_VALUE + (iv + 1));
 }
 
 /// Converts the specified unsigned 16 bit [value] to a signed 16 bit value.
-Short unsignedToSigned16(Char value) {
+int unsignedToSigned16(Char value) {
   var iv = value.toInt();
-  return Short(iv > Short.MAX_VALUE ? -(Char.MAX_VALUE - (iv - 1)) : iv);
+  return iv > Short.MAX_VALUE ? -(Char.MAX_VALUE - (iv - 1)) : iv;
 }
 
 /// Converts the specified unsigned 8 bit value to a signed 8 bit value.
 /// If the value specified is actually a 16 bit value, only the lower 8 bit
 /// will be used.
-Short unsignedToSigned8(Char value) {
+int unsignedToSigned8(Char value) {
   int iv = value & 0xff;
-  return Short(iv > Byte.MAX_VALUE ? -(255 - (iv - 1)) : iv);
+  return iv > Byte.MAX_VALUE ? -(255 - (iv - 1)) : iv;
 }

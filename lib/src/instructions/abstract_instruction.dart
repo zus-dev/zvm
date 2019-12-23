@@ -86,17 +86,17 @@ abstract class AbstractInstruction implements Instruction {
     if (operands[operandNum].getType() == OperandType.SMALL_CONSTANT) {
       return MemoryUtil.unsignedToSigned8(getUnsignedValue(operandNum));
     }*/
-    return unsignedToSigned16(getUnsignedValue(operandNum)).toInt();
+    return unsignedToSigned16(getUnsignedValue(operandNum));
   }
 
   /// A method to return the signed representation of the contents of a variable
   int getSignedVarValue(Char varnum) {
-    return unsignedToSigned16(getMachine().getVariable(varnum)).toInt();
+    return unsignedToSigned16(getMachine().getVariable(varnum));
   }
 
   /// A method to set a signed 16 Bit integer to the specified variable.
   void setSignedVarValue(Char varnum, int value) {
-    getMachine().setVariable(varnum, signedToUnsigned16(Short(value)));
+    getMachine().setVariable(varnum, signedToUnsigned16(value));
   }
 
   /// Retrieves the value of the specified operand as an unsigned 16 bit
@@ -120,7 +120,7 @@ abstract class AbstractInstruction implements Instruction {
 
   /// Stores a signed value in the result variable.
   void storeSignedResult(final int value) {
-    storeUnsignedResult(signedToUnsigned16(Short(value)));
+    storeUnsignedResult(signedToUnsigned16(value));
   }
 
   // *********************************************************************

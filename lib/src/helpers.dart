@@ -78,19 +78,9 @@ class Byte {
 }
 
 /// Signed 16 bit value
-/// TODO: Delete me!
 class Short {
   static final int MIN_VALUE = -pow(2, 15);
   static final int MAX_VALUE = pow(2, 15) - 1;
-  int _value = 0;
-
-  Short([value = 0]) {
-    // TODO: keep in range code & 0xffff
-    assert(value >= MIN_VALUE && value <= MAX_VALUE);
-    _value = value;
-  }
-
-  int toInt() => _value;
 }
 
 class ByteArray extends ListBase<int> {
