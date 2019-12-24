@@ -1,7 +1,7 @@
 import '../../zvm.dart';
 
 /// This class encapsulates the a memory object within an input stream.
-class MemoryInputStream extends JavaInputStream {
+class MemoryInputStream extends BytesInputStream {
 
   /// The memory object this stream is based on.
   Memory _memory;

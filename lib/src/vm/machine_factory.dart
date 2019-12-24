@@ -2,7 +2,7 @@ import '../../zvm.dart';
 
 /// Initialization structure.
 class MachineInitStruct {
-  JavaInputStream storyFile, blorbFile;
+  BytesInputStream storyFile, blorbFile;
   URL storyURL, blorbURL;
   InputStream keyboardInputStream;
   StatusLine statusLine;
@@ -95,7 +95,7 @@ class MachineFactory {
   }
 
   /// Reads Blorb's form chunk from the specified input stream object.
-  FormChunk _readBlorb(JavaInputStream blorbis) {
+  FormChunk _readBlorb(BytesInputStream blorbis) {
     if (_blorbchunk == null) {
       ByteArray data = FileUtils.readFileBytes(blorbis);
       if (data != null) {

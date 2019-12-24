@@ -335,7 +335,7 @@ class SAXParserFactory {
 /// Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input.
 /// https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html
 /// TODO: Fix me!
-abstract class JavaInputStream {
+abstract class BytesInputStream {
   int read();
 
   void mark(final int readLimit);
@@ -344,7 +344,7 @@ abstract class JavaInputStream {
 }
 
 class URL {
-  JavaInputStream openStream() {
+  BytesInputStream openStream() {
     throw UnimplementedError();
   }
 }

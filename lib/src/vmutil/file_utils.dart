@@ -18,7 +18,7 @@ class FileUtils {
   }
 
   /// Reads an array of bytes from the given input stream.
-  static ByteArray readFileBytes(final JavaInputStream inputstream) {
+  static ByteArray readFileBytes(final BytesInputStream inputstream) {
     if (inputstream == null) return null;
     throw UnimplementedError();
   }
