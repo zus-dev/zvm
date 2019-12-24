@@ -2,7 +2,7 @@
 class InvalidStoryException implements Exception {
   String cause;
 
-  InvalidStoryException(this.cause);
+  InvalidStoryException([this.cause]);
 
   String getMessage() => cause;
 }

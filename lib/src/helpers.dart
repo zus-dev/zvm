@@ -342,3 +342,9 @@ abstract class JavaInputStream {
 
   void reset();
 }
+
+class URL {
+  JavaInputStream openStream() {
+    throw UnimplementedError();
+  }
+}
