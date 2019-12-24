@@ -60,6 +60,7 @@ export 'src/instructions/abstract_instruction.dart';
 export 'src/instructions/c0op_instruction.dart';
 export 'src/instructions/c1op_instruction.dart';
 export 'src/instructions/c2op_instruction.dart';
+export 'src/instructions/ext_instruction.dart';
 export 'src/instructions/instruction_info_db.dart';
 export 'src/instructions/operand.dart';
 export 'src/io/input_stream.dart';
