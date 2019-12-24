@@ -285,7 +285,7 @@ abstract class AbstractInstruction implements Instruction {
     } else {
       value = _machine.getVariable(varnum);
     }
-    return toS04x(value);
+    return toS04x(value.toInt());
   }
 
   /// Returns the string representation of the operands.
@@ -298,10 +298,10 @@ abstract class AbstractInstruction implements Instruction {
       final Operand operand = _operands[i];
       switch (operand.getType()) {
         case OperandType.SMALL_CONSTANT:
-          buffer.write(toS02x(operand.getValue()));
+          buffer.write(toS02x(operand.getValue().toInt()));
           break;
         case OperandType.LARGE_CONSTANT:
-          buffer.write(toS04x(operand.getValue()));
+          buffer.write(toS04x(operand.getValue().toInt()));
           break;
         case OperandType.VARIABLE:
           buffer.write(_getVarName(operand.getValue().toInt()));

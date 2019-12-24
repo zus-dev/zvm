@@ -154,13 +154,13 @@ String toHexStrPad4Space(int value) {
 }
 
 /// $%04x
-String toS04x(Char value){
-  return "\$" + toHexStr(value.toInt(), width: 4, padding: '0');
+String toS04x(int value) {
+  return "\$" + toHexStr(value, width: 4, padding: '0');
 }
 
 /// $%02x
-String toS02x(Char value){
-  return "\$" + toHexStr(value.toInt(), width: 2, padding: '0');
+String toS02x(int value) {
+  return "\$" + toHexStr(value, width: 2, padding: '0');
 }
 
 /// L%02x
@@ -173,7 +173,7 @@ String toG02x(int value) {
   return toHex02x("G", value);
 }
 
-String toHex02x(String prefix, int value){
+String toHex02x(String prefix, int value) {
   return prefix + toHexStr(value, width: 2, padding: '0');
 }
 
@@ -304,22 +304,19 @@ class Executors {
 }
 
 // TODO: Delete me!
-class Attributes {
-}
+class Attributes {}
 
 // TODO: SAX XML parser
 abstract class DefaultHandler {
   void startElement(final String uri, final String localName,
       final String qname, final Attributes attributes);
 
-  void endElement(final String uri, final String localName,
-      final String qname);
+  void endElement(final String uri, final String localName, final String qname);
 
   void characters(final List<Char> ch, final int start, final int length);
 }
 
-
-class SAXParser{
+class SAXParser {
   void parse(Object meminput, Object handler) {
     // TODO: implement me!
     throw UnimplementedError();

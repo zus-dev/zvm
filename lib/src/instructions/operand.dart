@@ -8,16 +8,16 @@ enum OperandType { SMALL_CONSTANT, LARGE_CONSTANT, VARIABLE, OMITTED }
 /// the type.
 class Operand {
   /// Type number for a large constant.
-  static final int TYPENUM_LARGE_CONSTANT = 0x00;
+  static const int TYPENUM_LARGE_CONSTANT = 0x00;
 
   /// Type number for a small constant.
-  static final int TYPENUM_SMALL_CONSTANT = 0x01;
+  static const int TYPENUM_SMALL_CONSTANT = 0x01;
 
   /// Type number for a variable.
-  static final int TYPENUM_VARIABLE = 0x02;
+  static const int TYPENUM_VARIABLE = 0x02;
 
   /// Type number for omitted.
-  static final int TYPENUM_OMITTED = 0x03;
+  static const int TYPENUM_OMITTED = 0x03;
 
   OperandType _type;
   Char _value;
