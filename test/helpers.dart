@@ -68,7 +68,11 @@ void assertArraysEquals(Iterable actual, Iterable expected) {
 }
 
 ByteArray readTestFileAsByteArray(String fileName) {
-  final s = Platform.pathSeparator;
-  final testSaveFile = File('testfiles${s}${fileName}');
+  final testSaveFile = File(getTestFilePath(fileName));
   return ByteArray(testSaveFile.readAsBytesSync());
+}
+
+String getTestFilePath(String fileName) {
+  final s = Platform.pathSeparator;
+  return 'testfiles${s}${fileName}';
 }

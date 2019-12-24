@@ -341,6 +341,10 @@ abstract class BytesInputStream {
   void mark(final int readLimit);
 
   void reset();
+
+  ByteArray readAsBytesSync() {
+    throw UnimplementedError();
+  }
 }
 
 class URL {

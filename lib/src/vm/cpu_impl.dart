@@ -259,6 +259,7 @@ class CpuImpl implements Cpu {
       final RoutineContext popped =
           _routineContextStack[_routineContextStack.length - 1];
       _routineContextStack.remove(_routineContextStack.length - 1);
+      print("TEST: returnWith: " + returnValue.toInt().toString());
       popped.setReturnValue(returnValue);
 
       // Restore stack pointer and pc
