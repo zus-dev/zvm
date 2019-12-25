@@ -272,14 +272,14 @@ class VarInstruction extends AbstractInstruction {
 
   /// Returns the read interrupt routine address.
   Char _getReadInterruptRoutine() {
-    return getNumOperands() >= 4 ? getUnsignedValue(3) : 0;
+    return getNumOperands() >= 4 ? getUnsignedValue(3) : Char(0);
   }
 
   /// Returns the number of Characters left in the text buffer when timed
   /// input interrupt occurs.
   int _getNumLeftOverChars(Char textbuffer) {
     return getStoryVersion() >= 5
-        ? getMachine().readUnsigned8(textbuffer.toInt() + 1)
+        ? getMachine().readUnsigned8(textbuffer.toInt() + 1).toInt()
         : 0;
   }
 
@@ -495,12 +495,12 @@ class VarInstruction extends AbstractInstruction {
 
   /// Returns the interrupt time for READ_CHAR timed input.
   int _getReadCharInterruptTime() {
-    return getNumOperands() >= 2 ? getUnsignedValue(1) : 0;
+    return getNumOperands() >= 2 ? getUnsignedValue(1).toInt() : 0;
   }
 
   /// Returns the address of the interrupt routine for READ_CHAR timed input.
   Char _getReadCharInterruptRoutine() {
-    return getNumOperands() >= 3 ? getUnsignedValue(2) : 0;
+    return getNumOperands() >= 3 ? getUnsignedValue(2) : Char(0);
   }
 
   /// Second stage of READ_CHAR.
