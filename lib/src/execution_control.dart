@@ -14,7 +14,7 @@ class ExecutionControl implements Serializable {
   /// The flag to indicate interrupt output.
   bool _interruptDidOutput = false;
 
-  static final bool DEBUG = true;
+  static final bool DEBUG = false;
   static final bool DEBUG_INTERRUPT = false;
 
   /// Returns the current step number.
