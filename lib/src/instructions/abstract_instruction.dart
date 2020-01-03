@@ -165,7 +165,7 @@ abstract class AbstractInstruction implements Instruction {
   /// number of arguments.
   void call(final int numArgs) {
     final Char packedAddress = getUnsignedValue(0);
-    final List<Char> args = List<Char>(numArgs);
+    final List<Char> args = FilledList.ofChar(numArgs);
     for (int i = 0; i < numArgs; i++) {
       args[i] = getUnsignedValue(i + 1);
     }

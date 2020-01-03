@@ -13,8 +13,8 @@ class HistoryEntry {
 
   @override
   String toString() {
-    List<int> orig = List<int>(original.length);
-    List<int> edit = List<int>(edited.length);
+    List<int> orig = FilledList.ofInt(original.length);
+    List<int> edit = FilledList.ofInt(edited.length);
 
     for (int i = 0; i < original.length; i++) {
       orig[i] = original[i].toInt();

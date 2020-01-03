@@ -63,7 +63,7 @@ class MemoryOutputStream implements OutputStream {
   /// Writes the text width in units.
   void _writeTextWidthInUnits(TablePosition tablepos) {
     int numwords = tablepos.bytesWritten;
-    List<Char> data = List<Char>(numwords);
+    List<Char> data = FilledList.ofChar(numwords);
 
     for (int i = 0; i < numwords; i++) {
       data[i] = _machine.readUnsigned8(tablepos.tableAddress + i + 2);

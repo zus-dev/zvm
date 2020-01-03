@@ -157,7 +157,7 @@ class InstructionDecoder implements Serializable {
 
   /// Join two int arrays which are not null.
   List<int> _joinArrays(List<int> arr1, List<int> arr2) {
-    List<int> result = List<int>(arr1.length + arr2.length);
+    List<int> result = FilledList.ofInt(arr1.length + arr2.length);
     arraycopy(arr1, 0, result, 0, arr1.length);
     arraycopy(arr2, 0, result, arr1.length, arr2.length);
     return result;
@@ -284,14 +284,14 @@ class InstructionDecoder implements Serializable {
 
   /// Extracts operand types.
   List<int> _extractOperandTypes(Char opTypeByte) {
-    List<int> opTypes = List<int>(_NUM_OPERAND_TYPES_PER_BYTE);
+    List<int> opTypes = FilledList.ofInt(_NUM_OPERAND_TYPES_PER_BYTE);
     int numTypes;
     for (numTypes = 0; numTypes < _NUM_OPERAND_TYPES_PER_BYTE; numTypes++) {
       int opType = _getOperandType(opTypeByte, numTypes);
       if (opType == Operand.TYPENUM_OMITTED) break;
       opTypes[numTypes] = opType;
     }
-    List<int> result = List<int>(numTypes);
+    List<int> result = FilledList.ofInt(numTypes);
     for (int i = 0; i < numTypes; i++) {
       result[i] = opTypes[i];
     }
@@ -300,7 +300,7 @@ class InstructionDecoder implements Serializable {
 
   /// Extract operands.
   List<Char> _extractOperands(int operandAddr, List<int> operandTypes) {
-    List<Char> result = List<Char>(operandTypes.length);
+    List<Char> result = FilledList.ofChar(operandTypes.length);
     int currentAddr = operandAddr;
     for (int i = 0; i < operandTypes.length; i++) {
       if (operandTypes[i] == Operand.TYPENUM_LARGE_CONSTANT) {

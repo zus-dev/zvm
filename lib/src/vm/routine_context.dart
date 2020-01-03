@@ -6,89 +6,89 @@ class RoutineContext {
   static final Char DISCARD_RESULT = Char(0xffff);
 
   /// The local variables
-  List<Char> locals;
+  List<Char> _locals;
 
   /// The return address.
-  int returnAddress;
+  int _returnAddress;
 
   /// The return variable number to store the return value to.
-  Char returnVarNum;
+  Char _returnVarNum;
 
   /// The stack pointer at invocation time.
-  Char invocationStackPointer;
+  Char _invocationStackPointer;
 
   /// The number of arguments.
-  int numArgs;
+  int _numArgs;
 
   /// The return value.
-  Char returnValue;
+  Char _returnValue;
 
   RoutineContext(int numLocalVariables) {
-    locals = List.generate(numLocalVariables, (_) => Char(0));
+    _locals = FilledList.ofChar(numLocalVariables);
   }
 
   /// Sets the number of arguments
   void setNumArguments(final int aNumArgs) {
-    this.numArgs = aNumArgs;
+    this._numArgs = aNumArgs;
   }
 
   /// Returns the number of arguments.
   int getNumArguments() {
-    return numArgs;
+    return _numArgs;
   }
 
   /// Returns the number of local variables.
   int getNumLocalVariables() {
-    return (locals == null) ? 0 : locals.length;
+    return (_locals == null) ? 0 : _locals.length;
   }
 
   /// Sets a value to the specified local variable number, starting with 0.
   void setLocalVariable(final Char localNum, final Char value) {
-    locals[localNum.toInt()] = value;
+    _locals[localNum.toInt()] = value;
   }
 
   /// Retrieves the value of the specified local variable number, starting at 0.
   Char getLocalVariable(final Char localNum) {
-    return locals[localNum.toInt()];
+    return _locals[localNum.toInt()];
   }
 
   /// Returns the routine's return address.
   int getReturnAddress() {
-    return returnAddress;
+    return _returnAddress;
   }
 
   /// Sets the return address.
   void setReturnAddress(final int address) {
-    this.returnAddress = address;
+    this._returnAddress = address;
   }
 
   /// Returns the routine's return variable number or DISCARD_RESULT.
   Char getReturnVariable() {
-    return returnVarNum;
+    return _returnVarNum;
   }
 
   /// Sets the routine's return variable number or DISCARD_RESULT.
   void setReturnVariable(final Char varnum) {
-    returnVarNum = varnum;
+    _returnVarNum = varnum;
   }
 
   /// Returns the stack pointer at invocation time.
   Char getInvocationStackPointer() {
-    return invocationStackPointer;
+    return _invocationStackPointer;
   }
 
   /// Sets the stack pointer at invocation time.
   void setInvocationStackPointer(final Char stackpointer) {
-    invocationStackPointer = stackpointer;
+    _invocationStackPointer = stackpointer;
   }
 
   /// Returns the return value.
   Char getReturnValue() {
-    return returnValue;
+    return _returnValue;
   }
 
   /// Sets the return value.
   void setReturnValue(final Char value) {
-    returnValue = value;
+    _returnValue = value;
   }
 }

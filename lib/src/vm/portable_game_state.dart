@@ -230,7 +230,7 @@ class PortableGameState implements Serializable {
     final int pvFlags = chunkMem.readUnsigned8(tmpoff++).toInt() & 0xff;
     final int numLocals = pvFlags & 0x0f;
     final bool discardResult = (pvFlags & 0x10) > 0;
-    stackFrame.locals = List<Char>.generate(numLocals, (_) => Char(0));
+    stackFrame.locals = FilledList.ofChar(numLocals);
 
     // Read the return variable, ignore the result if DISCARD_RESULT
     final Char returnVar = chunkMem.readUnsigned8(tmpoff++);
@@ -238,7 +238,7 @@ class PortableGameState implements Serializable {
     final int argSpec = chunkMem.readUnsigned8(tmpoff++).toInt() & 0xff;
     stackFrame.args = _getArgs(argSpec);
     final int evalStackSize = chunkMem.readUnsigned16(tmpoff).toInt();
-    stackFrame.evalStack = List<Char>.generate(evalStackSize, (_) => Char(0));
+    stackFrame.evalStack = FilledList.ofChar(evalStackSize);
     tmpoff += 2;
 
     // Read local variables
@@ -338,7 +338,7 @@ class PortableGameState implements Serializable {
     dummyFrame.args = List<Char>(0);
     dummyFrame.locals = List<Char>(0);
     int numElements = _calculateNumStackElements(machine, contexts, 0, 0);
-    dummyFrame.evalStack = List<Char>(numElements);
+    dummyFrame.evalStack = FilledList.ofChar(numElements);
     for (int i = 0; i < numElements; i++) {
       dummyFrame.evalStack[i] = machine.getStackElement(i);
     }
@@ -353,13 +353,13 @@ class PortableGameState implements Serializable {
       stackFrame.returnVariable = context.getReturnVariable();
 
       // Copy local variables
-      stackFrame.locals = List<Char>(context.getNumLocalVariables());
+      stackFrame.locals = FilledList.ofChar(context.getNumLocalVariables());
       for (int i = 0; i < stackFrame.locals.length; i++) {
         stackFrame.locals[i] = context.getLocalVariable(Char(i));
       }
 
       // Create argument array
-      stackFrame.args = List<Char>(context.getNumArguments());
+      stackFrame.args = FilledList.ofChar(context.getNumArguments());
       for (int i = 0; i < stackFrame.args.length; i++) {
         stackFrame.args[i] = Char(i);
       }
@@ -368,7 +368,7 @@ class PortableGameState implements Serializable {
       final int localStackStart = context.getInvocationStackPointer().toInt();
       numElements =
           _calculateNumStackElements(machine, contexts, c + 1, localStackStart);
-      stackFrame.evalStack = List<Char>(numElements);
+      stackFrame.evalStack = FilledList.ofChar(numElements);
       for (int i = 0; i < numElements; i++) {
         stackFrame.evalStack[i] = machine.getStackElement(localStackStart + i);
       }
@@ -599,7 +599,7 @@ class PortableGameState implements Serializable {
         result.add(Char(i));
       }
     }
-    final charArray = List<Char>.generate(result.length, (_) => Char(0));
+    final charArray = FilledList.ofChar(result.length);
     for (int i = 0; i < result.length; i++) {
       charArray[i] = result[i];
     }

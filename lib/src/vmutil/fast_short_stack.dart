@@ -8,7 +8,7 @@ class FastShortStack {
   int _stackpointer = 0;
 
   FastShortStack(final int size) {
-    _values = List<Char>(size);
+    _values = FilledList.ofChar(size);
     _stackpointer = 0;
   }
 

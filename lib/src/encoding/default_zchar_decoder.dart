@@ -177,7 +177,7 @@ class DefaultZCharDecoder implements ZCharDecoder {
       }
     } while (!isEndWord(zword));
 
-    final result = List<Char>.generate(byteList.length * 3, (_) => Char(0));
+    final result = FilledList.ofChar(byteList.length * 3);
     int i = 0;
     for (List<Char> triplet in byteList) {
       for (Char b in triplet) {
@@ -204,7 +204,7 @@ class DefaultZCharDecoder implements ZCharDecoder {
   /// @return an array of three bytes containing the three 5-bit ZSCII characters
   /// encoded in the word
   static List<Char> _extractZEncodedBytes(final Char zword) {
-    final List<Char> result = List<Char>.generate(3, (_) => Char(0));
+    final List<Char> result = FilledList.ofChar(3);
     result[2] = Char(zword.toInt() & 0x1f);
     result[1] = Char((zword.toInt() >> 5) & 0x1f);
     result[0] = Char((zword.toInt() >> 10) & 0x1f);

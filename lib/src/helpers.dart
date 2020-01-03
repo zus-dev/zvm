@@ -72,6 +72,17 @@ class Char {
       rune == 0xFEFF;
 }
 
+class FilledList
+{
+  static List<Char> ofChar(int length) {
+    return List<Char>.generate(length, (_) => Char(0));
+  }
+
+  static List<int> ofInt(int length) {
+    return List<int>.generate(length, (_) => 0);
+  }
+}
+
 class Byte {
   static final int MIN_VALUE = -128;
   static final int MAX_VALUE = 127;

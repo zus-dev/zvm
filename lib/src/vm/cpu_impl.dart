@@ -344,7 +344,7 @@ class CpuImpl implements Cpu {
   /// Decodes the routine at the specified address.
   RoutineContext _decodeRoutine(final int routineAddress) {
     final int numLocals = _machine.readUnsigned8(routineAddress).toInt();
-    final List<Char> locals = List<Char>(numLocals);
+    final List<Char> locals = FilledList.ofChar(numLocals);
 
     if (_machine.getVersion() <= 4) {
       // Only story files <= 4 actually store default values here,
