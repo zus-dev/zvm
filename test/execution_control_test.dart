@@ -69,6 +69,15 @@ class TestIOSystem extends IOSystem {
   }
 }
 
+class TestStatusLineListener extends StatusLineListener {
+  @override
+  void statusLineUpdated(String objectDescription, String status) {
+    print("STATUS-LINE: $objectDescription :: $status");
+    // TODO: implement statusLineUpdated
+  }
+
+}
+
 class TestScreenModelListener extends ScreenModelListener {
   @override
   void screenModelUpdated(ScreenModel screenModel) {
@@ -100,6 +109,7 @@ class TestScreenModelListener extends ScreenModelListener {
 
   @override
   void topWindowUpdated(int cursorx, int cursory, AnnotatedCharacter c) {
+    print('TOP-WIN: $cursorx $cursory ${c.getCharacter().toString()}');
     // TODO: implement topWindowUpdated
   }
 
@@ -112,7 +122,9 @@ class TestScreenModelListener extends ScreenModelListener {
 void main() {
   BufferedScreenModel screenModel = BufferedScreenModel();
   final screenModelListener = TestScreenModelListener();
+  final statusLineListener = TestStatusLineListener();
   screenModel.addScreenModelListener(screenModelListener);
+  screenModel.addStatusLineListener(statusLineListener);
 
   final initStruct = MachineInitStruct();
   initStruct.storyFile = FileBytesInputStream(getTestFilePath("minizork.z3"));
