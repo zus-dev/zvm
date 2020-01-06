@@ -41,17 +41,19 @@ class TestImageFactory extends NativeImageFactory {
   }
 }
 
-class TestSaveGameDataStore extends SaveGameDataStore {
-  @override
-  FormChunk retrieveFormChunk() {
-    // TODO: implement retrieveFormChunk
-    return null;
-  }
+/// This class saves save games as a memory object.
+class MemorySaveGameDataStore implements SaveGameDataStore {
+  WritableFormChunk _savegame;
 
   @override
   bool saveFormChunk(WritableFormChunk formchunk) {
-    // TODO: implement saveFormChunk
-    return null;
+    _savegame = formchunk;
+    return true;
+  }
+
+  @override
+  FormChunk retrieveFormChunk() {
+    return _savegame;
   }
 }
 
@@ -129,7 +131,7 @@ void main() {
   final initStruct = MachineInitStruct();
   initStruct.storyFile = FileBytesInputStream(getTestFilePath("minizork.z3"));
   initStruct.nativeImageFactory = TestImageFactory();
-  initStruct.saveGameDataStore = TestSaveGameDataStore();
+  initStruct.saveGameDataStore = MemorySaveGameDataStore();
   initStruct.ioSystem = TestIOSystem();
   initStruct.screenModel = screenModel;
   initStruct.statusLine = screenModel;
@@ -148,13 +150,16 @@ void main() {
     MachineRunState runState = executionControl.run();
     print("PAUSING WITH STATE: " + runState.toString());
 
+    executionControl.resumeWithInput("save");
+    executionControl.resumeWithInput("restore");
+
     printObjectTree(executionControl.getMachine());
 
     executionControl.resumeWithInput("n");
     print("PAUSING WITH STATE: " + runState.toString());
     // mainView.setCurrentRunState(runState);
 
-    printObjectTree(executionControl.getMachine());
+    // printObjectTree(executionControl.getMachine());
 
     expect(true, equals(true));
   });

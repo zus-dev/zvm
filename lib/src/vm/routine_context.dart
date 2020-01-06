@@ -9,19 +9,19 @@ class RoutineContext {
   List<Char> _locals;
 
   /// The return address.
-  int _returnAddress;
+  int _returnAddress = 0;
 
   /// The return variable number to store the return value to.
-  Char _returnVarNum;
+  Char _returnVarNum = Char(0);
 
   /// The stack pointer at invocation time.
-  Char _invocationStackPointer;
+  Char _invocationStackPointer = Char(0);
 
   /// The number of arguments.
-  int _numArgs;
+  int _numArgs = 0;
 
   /// The return value.
-  Char _returnValue;
+  Char _returnValue = Char(0);
 
   RoutineContext(int numLocalVariables) {
     _locals = FilledList.ofChar(numLocalVariables);
