@@ -5,6 +5,8 @@ import 'package:zvm/zvm.dart';
 
 import 'helpers.dart';
 
+bool _enablePrintObjProps = false;
+
 class FileBytesInputStream extends BytesInputStream {
   String fileName;
 
@@ -178,8 +180,47 @@ void main() {
     expect(runState.getTime().toInt(), equals(0));
     expect(runState.getRoutine().toInt(), equals(0));
 
+    _enablePrintObjProps = true;
     printObjectTree(executionControl.getMachine());
     // mainView.setCurrentRunState(runState);
+  });
+
+  test('Curses Execution Control Flow', () {
+    final screenModelListener = TestScreenModelListener();
+    final statusLineListener = TestStatusLineListener();
+
+    BufferedScreenModel screenModel = BufferedScreenModel();
+    screenModel.addScreenModelListener(screenModelListener);
+    screenModel.addStatusLineListener(statusLineListener);
+
+    final initStruct = MachineInitStruct();
+    initStruct.nativeImageFactory = TestImageFactory();
+    initStruct.ioSystem = TestIOSystem();
+    initStruct.screenModel = screenModel;
+    initStruct.statusLine = screenModel;
+    initStruct.storyFile = FileBytesInputStream(getTestFilePath("curses.z5"));
+    initStruct.saveGameDataStore = MemorySaveGameDataStore();
+
+    final executionControl = ExecutionControl(initStruct);
+    screenModel.init(
+      executionControl.getMachine(),
+      executionControl.getZsciiEncoding(),
+    );
+
+    MachineRunState runState = executionControl.run();
+    expect(runState.getTime().toInt(), equals(0));
+    expect(runState.getRoutine().toInt(), equals(0));
+    // expect(screenModelListener.lower.toString(),
+    //    startsWith("MINI-ZORK I: The Great Underground Empire"));
+    expect(screenModelListener.lower.toString(), contains("Welcome to CURSES"));
+    // expect(statusLineListener.objectDescription, equals("West of House"));
+    // expect(statusLineListener.status, equals("0/0"));
+
+    executionControl.resumeWithInput("save");
+    executionControl.resumeWithInput("n");
+
+    _enablePrintObjProps = false;
+    printObjectTree(executionControl.getMachine());
   });
 }
 
@@ -258,7 +299,9 @@ void printObjMap(
   for (var objectNum in objMap.keys) {
     if (objectTree.getParent(objectNum) == parent) {
       print(prefix + objMap[objectNum]);
-      printObjProps(objectNum, prefix + "\t", objectTree);
+      if (_enablePrintObjProps) {
+        printObjProps(objectNum, prefix + "\t", objectTree);
+      }
       printObjMap(objMap, objectNum, objectTree, prefix + "\t");
     }
   }
