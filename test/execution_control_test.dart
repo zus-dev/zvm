@@ -72,18 +72,23 @@ class TestIOSystem extends IOSystem {
 }
 
 class TestStatusLineListener extends StatusLineListener {
+  String objectDescription;
+  String status;
+
   @override
   void statusLineUpdated(String objectDescription, String status) {
     print("STATUS-LINE: $objectDescription :: $status");
-    // TODO: implement statusLineUpdated
+    this.objectDescription = objectDescription;
+    this.status = status;
   }
-
 }
 
 class TestScreenModelListener extends ScreenModelListener {
+  StringBuffer lower;
+
   @override
   void screenModelUpdated(ScreenModel screenModel) {
-    StringBuffer lower = StringBuffer();
+    lower = StringBuffer();
     if (screenModel is BufferedScreenModel) {
       List<AnnotatedText> text = screenModel.getLowerBuffer();
       for (AnnotatedText segment in text) {
@@ -94,13 +99,16 @@ class TestScreenModelListener extends ScreenModelListener {
       /// TODO: Distinguish C1OpInstruction._print_obj and make annotations for
       /// a "room" and an "object"
       /// e.g. encrusted/src/rust/ui_web.rs fn flush
+      print('SCREEN-LOWER-BEGIN');
       print(lower.toString());
+      print('SCREEN-LOWER-END');
       //upper.setCurrentStyle(screenModel.getBottomAnnotation());
     }
   }
 
   @override
   void screenSplit(int linesUpperWindow) {
+    print('SCREEN-SPLIT: $linesUpperWindow');
     // TODO: implement screenSplit
   }
 
@@ -122,21 +130,22 @@ class TestScreenModelListener extends ScreenModelListener {
 }
 
 void main() {
-  BufferedScreenModel screenModel = BufferedScreenModel();
-  final screenModelListener = TestScreenModelListener();
-  final statusLineListener = TestStatusLineListener();
-  screenModel.addScreenModelListener(screenModelListener);
-  screenModel.addStatusLineListener(statusLineListener);
+  test('Minizork Execution Control Flow', () {
+    final screenModelListener = TestScreenModelListener();
+    final statusLineListener = TestStatusLineListener();
 
-  final initStruct = MachineInitStruct();
-  initStruct.storyFile = FileBytesInputStream(getTestFilePath("minizork.z3"));
-  initStruct.nativeImageFactory = TestImageFactory();
-  initStruct.saveGameDataStore = MemorySaveGameDataStore();
-  initStruct.ioSystem = TestIOSystem();
-  initStruct.screenModel = screenModel;
-  initStruct.statusLine = screenModel;
+    BufferedScreenModel screenModel = BufferedScreenModel();
+    screenModel.addScreenModelListener(screenModelListener);
+    screenModel.addStatusLineListener(statusLineListener);
 
-  test('Start', () {
+    final initStruct = MachineInitStruct();
+    initStruct.nativeImageFactory = TestImageFactory();
+    initStruct.ioSystem = TestIOSystem();
+    initStruct.screenModel = screenModel;
+    initStruct.statusLine = screenModel;
+    initStruct.storyFile = FileBytesInputStream(getTestFilePath("minizork.z3"));
+    initStruct.saveGameDataStore = MemorySaveGameDataStore();
+
     final executionControl = ExecutionControl(initStruct);
     // initUI(initStruct);
     {
@@ -148,20 +157,29 @@ void main() {
 
     // notifyGameInitialized();
     MachineRunState runState = executionControl.run();
-    print("PAUSING WITH STATE: " + runState.toString());
+    expect(runState.getTime().toInt(), equals(0));
+    expect(runState.getRoutine().toInt(), equals(0));
+    expect(screenModelListener.lower.toString(),
+        startsWith("MINI-ZORK I: The Great Underground Empire"));
+    expect(screenModelListener.lower.toString(), contains("West of House"));
+    expect(statusLineListener.objectDescription, equals("West of House"));
+    expect(statusLineListener.status, equals("0/0"));
 
     executionControl.resumeWithInput("save");
+    executionControl.resumeWithInput("n");
+    expect(statusLineListener.objectDescription, equals("North of House"));
+    expect(statusLineListener.status, equals("0/1"));
+
     executionControl.resumeWithInput("restore");
+    expect(statusLineListener.objectDescription, equals("West of House"));
+    expect(statusLineListener.status, equals("0/0"));
+
+    runState = executionControl.resumeWithInput("n");
+    expect(runState.getTime().toInt(), equals(0));
+    expect(runState.getRoutine().toInt(), equals(0));
 
     printObjectTree(executionControl.getMachine());
-
-    executionControl.resumeWithInput("n");
-    print("PAUSING WITH STATE: " + runState.toString());
     // mainView.setCurrentRunState(runState);
-
-    // printObjectTree(executionControl.getMachine());
-
-    expect(true, equals(true));
   });
 }
 
