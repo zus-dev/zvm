@@ -102,6 +102,16 @@ class TestScreenModelListener extends ScreenModelListener
   @override
   void screenModelUpdated(ScreenModel screenModel) {
     if (screenModel is BufferedScreenModel) {
+      print("SCREEN-BEGIN");
+      final upperLines = upper.toString().split('\n');
+      for (int i = 0; i < upperLines.length; i++) {
+        final line = upperLines[i];
+        if (line.trim() != '') {
+          print(line.trim());
+        }
+      }
+
+      lower.clear();
       List<AnnotatedText> text = screenModel.getLowerBuffer();
       for (AnnotatedText segment in text) {
         lower.write(segment.getText());
@@ -111,49 +121,33 @@ class TestScreenModelListener extends ScreenModelListener
       /// TODO: Distinguish C1OpInstruction._print_obj and make annotations for
       /// a "room" and an "object"
       /// e.g. encrusted/src/rust/ui_web.rs fn flush
-      ///
 
       // NOTE: for the buffered output we might want not to output immediately
       // for the example see curses.z5
-      // INFO: org.zmpp.screen: SET_BUFFER_MODE: false
-      // INFO: org.zmpp.screen: SET_BUFFER_MODE: true
+      // INFO: org.zmpp.screen: SET_BUFFER_MODE:
 
+      print('SCREEN-LOWER');
+      for (final line in lower.toString().trim().split('\n')) {
+        if (line.trim() != '') {
+          print(line.trim());
+        }
+      }
+      print('SCREEN-END');
       //upper.setCurrentStyle(screenModel.getBottomAnnotation());
     }
-  }
-
-  void flush() {
-    print("SCREEN-BEGIN");
-    final upperLines = upper.toString().split('\n');
-    for (int i = 0; i < upperLines.length; i++) {
-      final line = upperLines[i];
-      if (line.trim() != '') {
-        print(line.trim());
-      }
-    }
-    upper.clear(ScreenModel.COLOR_DEFAULT);
-
-    print('SCREEN-LOWER');
-    for (final line in lower.toString().trim().split('\n')) {
-      if (line.trim() != '') {
-        print(line.trim());
-      }
-    }
-    print('SCREEN-END');
-
-    lower = StringBuffer();
   }
 
   @override
   void screenSplit(int linesUpperWindow) {
     print('SCREEN-SPLIT: $linesUpperWindow');
+    // TODO: clear only in v3
     // upper.clear(ScreenModel.COLOR_DEFAULT);
     numRowsUpper = linesUpperWindow;
   }
 
   @override
   void topWindowCursorMoving(int line, int column) {
-    print('TOP-WIN-MOVE: $line $column');
+    // print('TOP-WIN-MOVE: $line $column');
     // TODO: implement topWindowCursorMoving
   }
 
@@ -165,12 +159,29 @@ class TestScreenModelListener extends ScreenModelListener
 
   @override
   void windowErased(int window) {
-    // TODO: implement windowErased
+    if (window == -1) {
+      clearAll();
+    } else if (window == ScreenModel.WINDOW_BOTTOM) {
+      lower.clear();
+    } else if (window == ScreenModel.WINDOW_TOP) {
+      clearUpper();
+    } else {
+      throw UnsupportedOperationException("No support for erasing window: $window");
+    }
   }
 
   @override
   BufferedScreenModel getScreenModel() {
     return _screenModel;
+  }
+
+  void clearAll() {
+    lower.clear();
+    clearUpper();
+  }
+
+  void clearUpper() {
+    upper.clear(ScreenModel.COLOR_DEFAULT);
   }
 }
 
@@ -253,16 +264,20 @@ void main() {
     expect(runState.getTime().toInt(), equals(0));
     expect(runState.getRoutine().toInt(), equals(0));
     expect(screenModelListener.lower.toString(), contains("Welcome to CURSES"));
-    screenModelListener.flush();
 
     executionControl.resumeWithInput(" ");
-    screenModelListener.flush();
+    expect(screenModelListener.lower.toString(), contains("Attic"));
+    expect(screenModelListener.lower.toString(),
+        contains("The attics, full of low beams and awkward angles"));
+    expect(screenModelListener.upper.toString(), contains("Attic                                      Score: 0"));
 
     executionControl.resumeWithInput("save");
-    screenModelListener.flush();
 
     executionControl.resumeWithInput("n");
-    screenModelListener.flush();
+    expect(screenModelListener.lower.toString(), contains("Old Winery"));
+    expect(screenModelListener.lower.toString(),
+        contains("This small cavity at the north end of the attic once"));
+    expect(screenModelListener.upper.toString(), contains("Old Winery                                 Score: 0"));
 
     _enablePrintObjProps = false;
     // printObjectTree(executionControl.getMachine());

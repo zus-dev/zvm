@@ -100,9 +100,7 @@ class BufferedScreenModel implements ScreenModel, StatusLine, OutputStream {
   @override
   void setBufferMode(bool flag) {
     _LOG.info("SET_BUFFER_MODE: ${flag}");
-    if (_current == ScreenModel.WINDOW_BOTTOM) {
-      _bottomWindow.setBuffered(flag);
-    }
+    _bottomWindow.setBuffered(flag);
   }
 
   @override

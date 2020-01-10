@@ -385,6 +385,9 @@ class VarInstruction extends AbstractInstruction {
   void _buffer_mode() {
     final ScreenModel screenModel = getMachine().getScreen();
     if (screenModel != null) {
+      // If set to 1, text output on the lower window in stream 1
+      // is buffered up so that it can be word-wrapped properly.
+      // If set to 0, it isn't.
       screenModel.setBufferMode(getUnsignedValue(0).toInt() > 0);
     }
     nextInstruction();
