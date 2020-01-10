@@ -4,6 +4,8 @@ import 'package:test/test.dart';
 import 'package:zvm/zvm.dart';
 
 import 'helpers.dart';
+import 'views/screen_model_split_view.dart';
+import 'views/text_grid_view.dart';
 
 bool _enablePrintObjProps = false;
 
@@ -85,12 +87,20 @@ class TestStatusLineListener extends StatusLineListener {
   }
 }
 
-class TestScreenModelListener extends ScreenModelListener {
-  StringBuffer lower;
+class TestScreenModelListener extends ScreenModelListener
+    implements ScreenModelSplitView {
+  TextGridView upper;
+  StringBuffer lower = StringBuffer();
+  BufferedScreenModel _screenModel;
+  int numRowsUpper = 0;
+
+  TestScreenModelListener(BufferedScreenModel bufferedScreenModel) {
+    _screenModel = bufferedScreenModel;
+    upper = TextGridView(this);
+  }
 
   @override
   void screenModelUpdated(ScreenModel screenModel) {
-    lower = StringBuffer();
     if (screenModel is BufferedScreenModel) {
       List<AnnotatedText> text = screenModel.getLowerBuffer();
       for (AnnotatedText segment in text) {
@@ -101,61 +111,99 @@ class TestScreenModelListener extends ScreenModelListener {
       /// TODO: Distinguish C1OpInstruction._print_obj and make annotations for
       /// a "room" and an "object"
       /// e.g. encrusted/src/rust/ui_web.rs fn flush
-      print('SCREEN-LOWER-BEGIN');
-      print(lower.toString());
-      print('SCREEN-LOWER-END');
+      ///
+
+      // NOTE: for the buffered output we might want not to output immediately
+      // for the example see curses.z5
+      // INFO: org.zmpp.screen: SET_BUFFER_MODE: false
+      // INFO: org.zmpp.screen: SET_BUFFER_MODE: true
+
       //upper.setCurrentStyle(screenModel.getBottomAnnotation());
     }
+  }
+
+  void flush() {
+    print("SCREEN-BEGIN");
+    final upperLines = upper.toString().split('\n');
+    for (int i = 0; i < upperLines.length; i++) {
+      final line = upperLines[i];
+      if (line.trim() != '') {
+        print(line.trim());
+      }
+    }
+    upper.clear(ScreenModel.COLOR_DEFAULT);
+
+    print('SCREEN-LOWER');
+    for (final line in lower.toString().trim().split('\n')) {
+      if (line.trim() != '') {
+        print(line.trim());
+      }
+    }
+    print('SCREEN-END');
+
+    lower = StringBuffer();
   }
 
   @override
   void screenSplit(int linesUpperWindow) {
     print('SCREEN-SPLIT: $linesUpperWindow');
-    // TODO: implement screenSplit
+    // upper.clear(ScreenModel.COLOR_DEFAULT);
+    numRowsUpper = linesUpperWindow;
   }
 
   @override
   void topWindowCursorMoving(int line, int column) {
+    print('TOP-WIN-MOVE: $line $column');
     // TODO: implement topWindowCursorMoving
   }
 
   @override
   void topWindowUpdated(int cursorx, int cursory, AnnotatedCharacter c) {
-    print('TOP-WIN: $cursorx $cursory ${c.getCharacter().toString()}');
-    // TODO: implement topWindowUpdated
+    // print('TOP-WIN: $cursorx $cursory "${c.getCharacter().toString()}" [${c.getCharacter().toInt().toString()}]');
+    upper.setCharacter(cursory, cursorx, c);
   }
 
   @override
   void windowErased(int window) {
     // TODO: implement windowErased
   }
+
+  @override
+  BufferedScreenModel getScreenModel() {
+    return _screenModel;
+  }
 }
 
 void main() {
-  test('Minizork Execution Control Flow', () {
-    final screenModelListener = TestScreenModelListener();
-    final statusLineListener = TestStatusLineListener();
+  MachineInitStruct initStruct;
+  BufferedScreenModel screenModel;
+  TestScreenModelListener screenModelListener;
+  TestStatusLineListener statusLineListener;
 
-    BufferedScreenModel screenModel = BufferedScreenModel();
+  setUp(() {
+    screenModel = BufferedScreenModel();
+    screenModelListener = TestScreenModelListener(screenModel);
+    statusLineListener = TestStatusLineListener();
+
     screenModel.addScreenModelListener(screenModelListener);
     screenModel.addStatusLineListener(statusLineListener);
 
-    final initStruct = MachineInitStruct();
+    initStruct = MachineInitStruct();
     initStruct.nativeImageFactory = TestImageFactory();
     initStruct.ioSystem = TestIOSystem();
     initStruct.screenModel = screenModel;
     initStruct.statusLine = screenModel;
-    initStruct.storyFile = FileBytesInputStream(getTestFilePath("minizork.z3"));
     initStruct.saveGameDataStore = MemorySaveGameDataStore();
+  });
 
+  test('Minizork Execution Control', () {
+    initStruct.storyFile = FileBytesInputStream(getTestFilePath("minizork.z3"));
     final executionControl = ExecutionControl(initStruct);
     // initUI(initStruct);
-    {
-      screenModel.init(
-        executionControl.getMachine(),
-        executionControl.getZsciiEncoding(),
-      );
-    }
+    screenModel.init(
+      executionControl.getMachine(),
+      executionControl.getZsciiEncoding(),
+    );
 
     // notifyGameInitialized();
     MachineRunState runState = executionControl.run();
@@ -185,23 +233,17 @@ void main() {
     // mainView.setCurrentRunState(runState);
   });
 
-  test('Curses Execution Control Flow', () {
-    final screenModelListener = TestScreenModelListener();
-    final statusLineListener = TestStatusLineListener();
-
-    BufferedScreenModel screenModel = BufferedScreenModel();
-    screenModel.addScreenModelListener(screenModelListener);
-    screenModel.addStatusLineListener(statusLineListener);
-
-    final initStruct = MachineInitStruct();
-    initStruct.nativeImageFactory = TestImageFactory();
-    initStruct.ioSystem = TestIOSystem();
-    initStruct.screenModel = screenModel;
-    initStruct.statusLine = screenModel;
+  test('Curses Execution Control', () {
     initStruct.storyFile = FileBytesInputStream(getTestFilePath("curses.z5"));
-    initStruct.saveGameDataStore = MemorySaveGameDataStore();
-
     final executionControl = ExecutionControl(initStruct);
+    // initUI
+    // resizeScreen
+    final numRows = 32;
+    final numCharsPerRow = 80; // TODO: probably less?
+    executionControl.resizeScreen(numRows, numCharsPerRow);
+    screenModel.setNumCharsPerRow(numCharsPerRow);
+    screenModelListener.upper.setGridSize(numRows, numCharsPerRow);
+
     screenModel.init(
       executionControl.getMachine(),
       executionControl.getZsciiEncoding(),
@@ -210,17 +252,20 @@ void main() {
     MachineRunState runState = executionControl.run();
     expect(runState.getTime().toInt(), equals(0));
     expect(runState.getRoutine().toInt(), equals(0));
-    // expect(screenModelListener.lower.toString(),
-    //    startsWith("MINI-ZORK I: The Great Underground Empire"));
     expect(screenModelListener.lower.toString(), contains("Welcome to CURSES"));
-    // expect(statusLineListener.objectDescription, equals("West of House"));
-    // expect(statusLineListener.status, equals("0/0"));
+    screenModelListener.flush();
+
+    executionControl.resumeWithInput(" ");
+    screenModelListener.flush();
 
     executionControl.resumeWithInput("save");
+    screenModelListener.flush();
+
     executionControl.resumeWithInput("n");
+    screenModelListener.flush();
 
     _enablePrintObjProps = false;
-    printObjectTree(executionControl.getMachine());
+    // printObjectTree(executionControl.getMachine());
   });
 }
 
@@ -278,7 +323,7 @@ void printObjectTree(Machine machine) {
       yourself_object = i;
     }
 
-    int parent = objectTree.getParent(i);
+    // int parent = objectTree.getParent(i);
     // print("${i} => ${parent}: '${objectName}'");
     objMap[i] = "${i}: ${objectName}";
   }
