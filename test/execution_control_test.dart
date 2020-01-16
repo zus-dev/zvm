@@ -92,7 +92,6 @@ class TestScreenModelListener extends ScreenModelListener
   TextGridView upper;
   StringBuffer lower = StringBuffer();
   BufferedScreenModel _screenModel;
-  int numRowsUpper = 0;
 
   TestScreenModelListener(BufferedScreenModel bufferedScreenModel) {
     _screenModel = bufferedScreenModel;
@@ -142,7 +141,6 @@ class TestScreenModelListener extends ScreenModelListener
     print('SCREEN-SPLIT: $linesUpperWindow');
     // TODO: clear only in v3
     // upper.clear(ScreenModel.COLOR_DEFAULT);
-    numRowsUpper = linesUpperWindow;
   }
 
   @override
