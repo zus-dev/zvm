@@ -4,60 +4,17 @@ import 'package:test/test.dart';
 import 'package:zvm/zvm.dart';
 
 import 'helpers.dart';
+import 'views/memory_save_game_data_store.dart';
 import 'views/screen_model_split_view.dart';
 import 'views/text_grid_view.dart';
 
 bool _enablePrintObjProps = false;
-
-class FileBytesInputStream extends BytesInputStream {
-  String fileName;
-
-  FileBytesInputStream(this.fileName);
-
-  @override
-  ByteArray readAsBytesSync() {
-    final file = File(fileName);
-    return ByteArray(file.readAsBytesSync());
-  }
-
-  @override
-  void mark(int readLimit) {
-    // TODO: implement mark
-  }
-
-  @override
-  int read() {
-    // TODO: implement read
-    return null;
-  }
-
-  @override
-  void reset() {
-    // TODO: implement reset
-  }
-}
 
 class TestImageFactory extends NativeImageFactory {
   @override
   NativeImage createImage(BytesInputStream inputStream) {
     // TODO: implement createImage
     return null;
-  }
-}
-
-/// This class saves save games as a memory object.
-class MemorySaveGameDataStore implements SaveGameDataStore {
-  WritableFormChunk _savegame;
-
-  @override
-  bool saveFormChunk(WritableFormChunk formchunk) {
-    _savegame = formchunk;
-    return true;
-  }
-
-  @override
-  FormChunk retrieveFormChunk() {
-    return _savegame;
   }
 }
 

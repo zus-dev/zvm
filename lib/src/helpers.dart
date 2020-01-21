@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -72,8 +73,7 @@ class Char {
       rune == 0xFEFF;
 }
 
-class FilledList
-{
+class FilledList {
   static List<Char> ofChar(int length) {
     return List<Char>.generate(length, (_) => Char(0));
   }
@@ -355,6 +355,34 @@ abstract class BytesInputStream {
 
   ByteArray readAsBytesSync() {
     throw UnimplementedError();
+  }
+}
+
+class FileBytesInputStream extends BytesInputStream {
+  String fileName;
+
+  FileBytesInputStream(this.fileName);
+
+  @override
+  ByteArray readAsBytesSync() {
+    final file = File(fileName);
+    return ByteArray(file.readAsBytesSync());
+  }
+
+  @override
+  void mark(int readLimit) {
+    // TODO: implement mark
+  }
+
+  @override
+  int read() {
+    // TODO: implement read
+    return null;
+  }
+
+  @override
+  void reset() {
+    // TODO: implement reset
   }
 }
 
