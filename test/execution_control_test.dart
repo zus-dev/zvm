@@ -4,6 +4,7 @@ import 'package:test/test.dart';
 import 'package:zvm/zvm.dart';
 
 import 'helpers.dart';
+import 'views/file_save_game_data_store.dart';
 import 'views/memory_save_game_data_store.dart';
 import 'views/screen_model_split_view.dart';
 import 'views/text_grid_view.dart';
@@ -159,7 +160,18 @@ void main() {
     initStruct.ioSystem = TestIOSystem();
     initStruct.screenModel = screenModel;
     initStruct.statusLine = screenModel;
-    initStruct.saveGameDataStore = MemorySaveGameDataStore();
+    // initStruct.saveGameDataStore = MemorySaveGameDataStore();
+
+    final fsDataStore =  FileSaveGameDataStore();
+    fsDataStore.saveFile = "./testfiles/test_save_file.data";
+    initStruct.saveGameDataStore = fsDataStore;
+  });
+
+  tearDown(() {
+    final saveFile = File("./testfiles/test_save_file.data");
+    if (saveFile.existsSync()) {
+      saveFile.deleteSync();
+    }
   });
 
   test('Minizork Execution Control', () {
