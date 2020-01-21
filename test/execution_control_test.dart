@@ -280,18 +280,45 @@ void main() {
     _enablePrintObjProps = false;
     // printObjectTree(executionControl.getMachine());
   });
+
+  test('AdvR Execution Control', () {
+    final screenModelListener = TestScreenModelListener();
+    final statusLineListener = TestStatusLineListener();
+
+    BufferedScreenModel screenModel = BufferedScreenModel();
+    screenModel.addScreenModelListener(screenModelListener);
+    screenModel.addStatusLineListener(statusLineListener);
+
+    final initStruct = MachineInitStruct();
+    initStruct.nativeImageFactory = TestImageFactory();
+    initStruct.ioSystem = TestIOSystem();
+    initStruct.screenModel = screenModel;
+    initStruct.statusLine = screenModel;
+    initStruct.storyFile =
+        FileBytesInputStream(getTestFilePath("AdventureR.z5"));
+    initStruct.saveGameDataStore = MemorySaveGameDataStore();
+
+    final executionControl = ExecutionControl(initStruct);
+    screenModel.init(
+      executionControl.getMachine(),
+      executionControl.getZsciiEncoding(),
+    );
+
+    MachineRunState runState = executionControl.run();
+    expect(runState.getTime().toInt(), equals(0));
+    expect(runState.getRoutine().toInt(), equals(0));
+
+    executionControl.resumeWithInput("save");
+    executionControl.resumeWithInput("n");
+
+    _enablePrintObjProps = false;
+    printObjectTree(executionControl.getMachine());
+  });
 }
 
 void printObjectTree(Machine machine) {
   Memory minizorkmap = machine;
   ObjectTree objectTree = machine;
-
-  var abbreviations = Abbreviations(minizorkmap,
-      machine.readUnsigned16(StoryFileHeader.ABBREVIATIONS).toInt());
-  ZsciiEncoding encoding = ZsciiEncoding(DefaultAccentTable());
-  AlphabetTable alphabetTable = DefaultAlphabetTable();
-  ZCharTranslator translator = DefaultZCharTranslator(alphabetTable);
-  var converter = DefaultZCharDecoder(encoding, translator, abbreviations);
 
   // let prop_defaults = memory.read_word(0x0A)
   final prop_defaults = minizorkmap.readUnsigned16(0x0A).toInt();
@@ -326,8 +353,7 @@ void printObjectTree(Machine machine) {
 
     String objectName = "(No Name)";
     if (text_length > 0) {
-      objectName =
-          converter.decode2Zscii(minizorkmap, propaddress, 0).toString();
+      objectName = readUnicodeString(machine, propaddress, 0);
     }
 
     if (objectName == "cretin" ||
@@ -390,4 +416,13 @@ int getPropertyTableAddress(final Machine memory, final int objectNum) {
   final objectEntrySize = 9;
   final objectAddress = objectTreeStart + (objectNum - 1) * objectEntrySize;
   return memory.readUnsigned16(objectAddress + _OFFSET_PROPERTYTABLE).toInt();
+}
+
+String readUnicodeString(Machine machine, int address, int length) {
+  final String zsciiString = machine.decode2Zscii(address, 0);
+  StringBuffer sb = StringBuffer();
+  for (int i = 0, n = zsciiString.length; i < n; i++) {
+    sb.write(machine.getUnicodeChar(Char.at(zsciiString, i)).toString());
+  }
+  return sb.toString();
 }
