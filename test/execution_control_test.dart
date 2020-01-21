@@ -282,23 +282,16 @@ void main() {
   });
 
   test('AdvR Execution Control', () {
-    final screenModelListener = TestScreenModelListener();
-    final statusLineListener = TestStatusLineListener();
-
-    BufferedScreenModel screenModel = BufferedScreenModel();
-    screenModel.addScreenModelListener(screenModelListener);
-    screenModel.addStatusLineListener(statusLineListener);
-
-    final initStruct = MachineInitStruct();
-    initStruct.nativeImageFactory = TestImageFactory();
-    initStruct.ioSystem = TestIOSystem();
-    initStruct.screenModel = screenModel;
-    initStruct.statusLine = screenModel;
-    initStruct.storyFile =
-        FileBytesInputStream(getTestFilePath("AdventureR.z5"));
-    initStruct.saveGameDataStore = MemorySaveGameDataStore();
-
+    initStruct.storyFile = FileBytesInputStream(getTestFilePath("AdventureR.z5"));
     final executionControl = ExecutionControl(initStruct);
+    // initUI
+    // resizeScreen
+    final numRows = 32;
+    final numCharsPerRow = 80; // TODO: probably less?
+    executionControl.resizeScreen(numRows, numCharsPerRow);
+    screenModel.setNumCharsPerRow(numCharsPerRow);
+    screenModelListener.upper.setGridSize(numRows, numCharsPerRow);
+
     screenModel.init(
       executionControl.getMachine(),
       executionControl.getZsciiEncoding(),
